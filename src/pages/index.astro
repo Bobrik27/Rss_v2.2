@@ -1,16 +1,11 @@
 ---
-
+// Redirect to the default locale (ru) using meta refresh
 ---
-
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+<html>
+  <head>
+    <meta http-equiv="refresh" content="0; url=/ru" />
+  </head>
+ <body>
+    <p>Redirecting to <a href="/ru">/ru</a>...</p>
+  </body>
 </html>

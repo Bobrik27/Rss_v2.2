@@ -1,0 +1,25 @@
+---
+const { url } = Astro;
+const currentLang = url.pathname.split('/')[1] || 'ru';
+const languages = {
+  ru: 'Русский',
+  en: 'English',
+  de: 'Deutsch'
+};
+---
+
+<div class="language-picker">
+  <ul class="flex space-x-4">
+    {Object.entries(languages).map(([lang, label]) => (
+      <li set:html={lang}>
+        <a
+          href={`/${lang}${url.pathname.replace(`/${currentLang}`, '') || '/'}`}
+          class={`px-3 py-1 rounded ${currentLang === lang ? 'bg-gray-200 dark:bg-gray-700 font-bold' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600'}`}
+          aria-current={currentLang === lang ? 'page' : undefined}
+        >
+          {label}
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>

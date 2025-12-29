@@ -1,1 +1,23 @@
 @import "tailwindcss";
+
+:root {
+  /* Dark theme colors (default) */
+  --color-bg-primary: oklch(0.10 0.01 240); /* Deep slate background #0f172a equivalent */
+  --color-bg-secondary: oklch(0.15 0.01 240);
+  --color-text-primary: oklch(0.90 0.01 240);
+  --color-text-secondary: oklch(0.70 0.01 240);
+  --color-accent-primary: oklch(0.70 0.10 180); /* Cyan accent */
+  --color-accent-secondary: oklch(0.60 0.08 180);
+  --color-border: oklch(0.30 0.01 240);
+}
+
+:root[data-theme="light"] {
+  /* Light theme colors */
+  --color-bg-primary: oklch(0.98 0.01 240); /* Light background */
+  --color-bg-secondary: oklch(0.95 0.01 240);
+  --color-text-primary: oklch(0.20 0.01 240);
+  --color-text-secondary: oklch(0.40 0.01 240);
+  --color-accent-primary: oklch(0.55 0.08 180); /* Cyan accent adjusted for light */
+  --color-accent-secondary: oklch(0.45 0.08 180);
+  --color-border: oklch(0.80 0.01 240);
+}

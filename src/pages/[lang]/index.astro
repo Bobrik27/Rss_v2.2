@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/react/Hero.jsx';
 
 export function getStaticPaths() {
   return [
@@ -13,11 +14,5 @@ const { lang } = Astro.params;
 ---
 
 <Layout title="Run Swift Studio" lang={lang}>
-    <main class="pt-20">
-        <!-- Placeholder for Hero, will be replaced later -->
-        <div class="container mx-auto px-4 py-20 text-center">
-            <h1 class="text-4xl font-bold mb-4">Hello World in {lang}</h1>
-            <p class="text-[var(--color-text-secondary)]">Styles are now working.</p>
-        </div>
-    </main>
+    <Hero client:load />
 </Layout>

@@ -1,0 +1,108 @@
+---
+import { Workflow, GitBranch, Database, Bot, MessageSquare, Shield } from "lucide-react";
+
+// Данные из Home.tsx, перенесенные в массив для чистоты
+const competencies = [
+  {
+    title: "Architecture & Automation",
+    icon: Workflow,
+    items: [
+      "Event-Driven Architecture",
+      "Dispatcher / Worker / Orchestrator patterns",
+      "State Machines (FSM)",
+      "Human-in-the-Loop workflows",
+      "Fault-tolerant pipeline design"
+    ]
+  },
+  {
+    title: "n8n Expert",
+    icon: GitBranch,
+    items: [
+      "Complex workflows with branching & loops",
+      "Global Error Handling & retry logic",
+      "Code / Function nodes mastery",
+      "Webhooks, Wait, SplitInBatches",
+      "LangChain integrations"
+    ]
+  },
+  {
+    title: "Backend & Infrastructure",
+    icon: Database,
+    items: [
+      "PostgreSQL, Redis",
+      "RabbitMQ message queues",
+      "Docker / Docker Compose",
+      "MinIO (S3 storage)",
+      "VPS, Nginx, Traefik"
+    ]
+  },
+  {
+    title: "AI / LLM Integration",
+    icon: Bot,
+    items: [
+      "OpenAI, Ollama, LangChain",
+      "RAG systems with Qdrant vector DB",
+      "Prompt Engineering & agent chains",
+      "Structured Output / JSON repair",
+      "ComfyUI, Stable Diffusion, FFmpeg"
+    ]
+  },
+  {
+    title: "Telegram Ecosystem",
+    icon: MessageSquare,
+    items: [
+      "Telegram Bot API expertise",
+      "Mini Apps / Web Apps",
+      "Login Widget integration",
+      "Inline UX optimization",
+      "Security & token management"
+    ]
+  },
+  {
+    title: "Reliability & Troubleshooting",
+    icon: Shield,
+    items: [
+      "Global error handling strategies",
+      "Retry logic & idempotency",
+      "State control & monitoring",
+      "Root cause analysis",
+      "System recovery design"
+    ]
+  }
+];
+---
+
+<section id="competencies" class="py-32 relative">
+  <div class="container mx-auto px-4">
+    <div class="reveal-on-scroll text-center mb-16 max-w-3xl mx-auto">
+      <h2 class="text-4xl lg:text-5xl font-bold mb-4 text-foreground">
+        Core Competencies
+      </h2>
+      <p class="text-xl text-muted-foreground">
+        Enterprise-grade skills for building robust, scalable automation systems
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+      {competencies.map((comp, index) => (
+        <div 
+          class="reveal-on-scroll bg-card rounded-2xl p-8 border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 h-full group"
+          style={`transition-delay: ${index * 100}ms`}
+        >
+          <div class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
+            <comp.icon className="h-7 w-7 text-primary" />
+          </div>
+          <h3 class="text-2xl font-bold mb-4 text-foreground">{comp.title}</h3>
+          <ul class="space-y-3 text-muted-foreground">
+            {comp.items.map(item => (
+              <li class="flex items-start">
+                <span class="mr-2 text-primary mt-1.5 h-1.5 w-1.5 rounded-full bg-primary shrink-0 block"></span>
+                <span class="text-sm">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

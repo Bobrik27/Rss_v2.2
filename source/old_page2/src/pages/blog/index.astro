@@ -1,0 +1,114 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+// Получаем и сортируем посты (новые сверху)
+const posts = await getCollection('blog');
+const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<Layout title="Блог">
+  <div class="max-w-[1800px] mx-auto px-6 lg:px-12 py-32">
+    
+    <!-- Заголовок раздела -->
+    <header class="mb-20 text-center space-y-4 animate-fade-in">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border-primary/20 text-primary text-xs font-semibold tracking-wide uppercase">
+        <span class="w-2 h-2 rounded-full bg-brand-accent"></span>
+        Knowledge Base
+      </div>
+      <h1 class="text-4xl md:text-6xl font-bold">
+        Блог <span class="text-primary">Run Swift</span>
+      </h1>
+      <p class="text-xl text-brand-muted max-w-2xl mx-auto">
+        Инструкции, кейсы и новости из мира автоматизации.
+      </p>
+    </header>
+
+    <!-- Сетка статей -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {sortedPosts.map((post, index) => (
+        <a 
+          href={`/blog/${post.slug}`}
+          class="group relative flex flex-col bg-card border border-border rounded-2xl overflow-hidden hover:border-primary/50 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-2 animate-card"
+          style={`animation-delay: ${index * 150}ms`}
+        >
+          <!-- Картинка -->
+          <div class="aspect-video overflow-hidden bg-background relative">
+            {post.data.image ? (
+              <img 
+                src={post.data.image} 
+                alt={post.data.title}
+                class="w-full h-full object-cover transition duration-700 group-hover:scale-110"
+              />
+            ) : (
+              // Заглушка, если нет картинки
+              <div class="w-full h-full flex items-center justify-center bg-card">
+                 <img src="/logo.svg" class="w-12 h-12 opacity-20" />
+              </div>
+            )}
+            
+            <!-- Бейдж категории (Tags) -->
+            <div class="absolute top-4 left-4 flex gap-2">
+              {post.data.tags?.slice(0, 2).map((tag: string) => (
+                <span class="text-xs font-bold bg-black/50 backdrop-blur-md text-white px-2 py-1 rounded-lg border border-white/10">
+                  #{tag}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <!-- Контент -->
+          <div class="p-6 flex flex-col flex-grow">
+            <div class="flex justify-between items-center mb-3 text-xs text-muted-foreground font-medium">
+              <time datetime={post.data.pubDate.toISOString()}>
+                {post.data.pubDate.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' })}
+              </time>
+              {post.data.readTime && (
+                <span class="flex items-center gap-1">
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                  {post.data.readTime}
+                </span>
+              )}
+            </div>
+            
+            <h2 class="text-xl font-bold mb-3 leading-tight group-hover:text-primary transition-colors">
+              {post.data.title}
+            </h2>
+            
+            <p class="text-muted-foreground text-sm line-clamp-3 mb-4 flex-grow">
+              {post.data.description}
+            </p>
+            
+            <div class="flex items-center gap-2 text-sm font-bold text-foreground mt-auto group-hover:translate-x-2 transition-transform duration-300">
+              Читать статью 
+              <svg class="w-4 h-4 text-brand-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</Layout>
+
+<style>
+  /* Анимация появления */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-card {
+    opacity: 0; /* Скрыто до начала анимации */
+    animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  }
+  
+  .animate-fade-in {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+</style>

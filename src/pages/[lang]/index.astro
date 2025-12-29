@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/react/Hero.jsx';
+import AdditionalSection from '../../components/AdditionalSection.astro';
 
 export function getStaticPaths() {
   return [
@@ -16,3 +17,4 @@ const { lang } = Astro.params;
 <Layout title="Run Swift Studio" lang={lang}>
     <Hero client:load />
 </Layout>
+<AdditionalSection lang={lang} />

@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ScrollHero from '../components/interactive/ScrollHero';
+import Competencies from '../components/sections/Competencies.astro';
+import Marketing from '../components/sections/Marketing.astro';
+---
+
+<Layout title="Run Swift Studio | AI Automation Architect">
+  
+  <!-- Hero Section -->
+  <ScrollHero client:only="react" />
+
+  <!-- Content Section -->
+  <!-- z-20 и relative нужны, чтобы контент наезжал поверх canvas при скролле, но не перекрывал буквы пока они не упали -->
+  <div class="relative z-20 bg-background">
+    <Competencies />
+    <Marketing />
+    
+    <section id="contact" class="py-32 text-center border-t border-border/40">
+        <h2 class="text-4xl font-bold mb-6 text-foreground">Ready to scale?</h2>
+        <a href="mailto:contact@runswift.studio" class="inline-flex h-14 items-center justify-center rounded-full bg-primary px-10 text-lg font-bold text-white shadow-lg hover:scale-105 transition-transform">
+            Book a Call
+        </a>
+    </section>
+  </div>
+  
+</Layout>

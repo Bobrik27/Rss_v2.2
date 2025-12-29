@@ -1,0 +1,51 @@
+---
+import { COMPETENCIES } from '../data/portfolioData';
+---
+
+<div class="py-20 px-4">
+  <div class="max-w-7xl mx-auto">
+    <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-white">
+      Competencies
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {COMPETENCIES.map((competency) => {
+        const iconMap = {
+          'Cpu': '⚡',
+          'Zap': '⚡',
+          'Server': '🖥️',
+          'Brain': '🧠',
+          'MessageCircle': '💬',
+          'Shield': '🛡️'
+        };
+
+        const icon = (iconMap as any)[competency.icon] || '⚙️';
+
+        return (
+          <div
+            id={`competency-${competency.id}`}
+            class="bg-[#1e293b]/50 backdrop-blur-md border border-white/10 rounded-2xl p-6 transition-all duration-300 hover:border-brand-accent hover:shadow-lg hover:shadow-brand-accent/20"
+          >
+            <div class="flex items-start space-x-4">
+              <div class="p-2 bg-brand-accent/10 rounded-lg text-brand-accent">
+                <span class="text-xl">{icon}</span>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-white mb-3">
+                  {competency.title}
+                </h3>
+                <ul class="space-y-2">
+                  {competency.items.map((item) => (
+                    <li class="text-gray-300 text-sm flex items-start">
+                      <span class="text-brand-accent mr-2">•</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</div>

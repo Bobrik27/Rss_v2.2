@@ -1,0 +1,28 @@
+---
+const props = Astro.props;
+const lang = props.lang || 'en';
+---
+
+<section class="min-h-screen flex items-center justify-center bg-gradient-to-b from-slate-900 to-slate-800 text-white p-4">
+  <div class="max-w-4xl mx-auto text-center">
+    <h2 class="text-4xl md:text-6xl font-bold mb-6">
+      {lang === 'ru' ? 'Дополнительная секция' : lang === 'de' ? 'Zusätzlicher Abschnitt' : 'Additional Section'}
+    </h2>
+    <p class="text-xl mb-8">
+      {lang === 'ru' 
+        ? 'Прокрутите вниз, чтобы увидеть эффект падающих букв при прокрутке страницы' 
+        : lang === 'de' 
+          ? 'Scrollen Sie nach unten, um den Effekt der fallenden Buchstaben beim Scrollen der Seite zu sehen' 
+          : 'Scroll down to see the falling letters effect when scrolling the page'}
+    </p>
+    <div class="mt-20 p-8 bg-black/30 rounded-xl backdrop-blur-sm">
+      <p class="text-2xl">
+        {lang === 'ru' 
+          ? 'Это дополнительная секция для проверки анимации падающих букв.' 
+          : lang === 'de' 
+            ? 'Dies ist ein zusätzlicher Abschnitt, um die Animation der fallenden Buchstaben zu überprüfen.' 
+            : 'This is an additional section to check the falling letters animation.'}
+      </p>
+    </div>
+  </div>
+</section>

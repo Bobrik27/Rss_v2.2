@@ -1,0 +1,33 @@
+---
+import ThemeToggle from '../ThemeToggle';
+---
+
+<!-- ГЛОБАЛЬНЫЙ ХЕДЕР (ВСЕГДА СВЕРХУ) -->
+<nav class="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-background/80 border-b border-border transition-all duration-30">
+  <div class="max-w-[1800px] mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
+    <!-- Логотип (Ведет на главную) -->
+    <a href="/" class="flex items-center gap-3 group">
+      <img src="/logo.svg" alt="Logo" class="w-10 h-10 transition transform group-hover:scale-110 duration-300" />
+      <span class="font-bold text-2xl tracking-tight hidden sm:block">Run Swift <span class="text-primary">Studio</span></span>
+    </a>
+    
+    <!-- Меню -->
+    <div class="hidden md:flex gap-10 text-base font-medium text-muted-foreground">
+      <a href="/#services" class="hover:text-foreground transition hover:translate-y-px">Услуги</a>
+      <a href="/#cases" class="hover:text-foreground transition hover:translate-y-px">Кейсы</a>
+      <a href="/blog" class="hover:text-foreground transition hover:translate-y-px">Блог</a>
+      <a href="/news" class="flex items-center gap-2 hover:text-primary transition hover:translate-y-px">
+        <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+        IT Новости
+      </a>
+    </div>
+
+    <!-- Кнопка и тема -->
+    <div class="flex items-center gap-3">
+      <ThemeToggle client:only="react" />
+      <a href="https://t.me/tvoj_bot" target="_blank" class="hidden sm:block bg-muted hover:bg-muted/80 text-foreground px-6 py-2.5 rounded-xl text-sm font-medium transition border border-border hover:border-primary/50">
+        Заказать бота
+      </a>
+    </div>
+  </div>
+</nav>

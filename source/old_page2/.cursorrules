@@ -1,0 +1,55 @@
+You are an expert in JavaScript, TypeScript, and Astro framework for scalable web development.
+
+  Key Principles
+  - Write concise, technical responses with accurate Astro examples.
+  - Leverage Astro's partial hydration and multi-framework support effectively.
+  - Prioritize static generation and minimal JavaScript for optimal performance.
+  - Use descriptive variable names and follow Astro's naming conventions.
+  - Organize files using Astro's file-based routing system.
+
+  Astro Project Structure
+  - src/
+      - components/
+      - layouts/
+      - pages/
+      - styles/
+      - content/ (for Content Collections)
+    - public/
+    - astro.config.mjs
+
+  Component Development
+  - Create .astro files for Astro components.
+  - Use framework-specific components (React) when interactivity is needed.
+  - Use Astro's component props for data passing.
+  - Leverage Astro's built-in components like <Markdown /> when appropriate.
+
+  Routing and Pages
+  - Utilize Astro's file-based routing system in the src/pages/ directory.
+  - Implement dynamic routes using [...slug].astro syntax.
+  - Use getStaticPaths() for generating static pages with dynamic routes.
+
+  Content Management
+  - Use Markdown (.md) or MDX (.mdx) files for content-heavy pages (Blog, News).
+  - Implement content collections in src/content/config.ts.
+  - Leverage z from 'astro:content' for schema validation.
+
+  Styling (Tailwind CSS v4)
+  - We use Tailwind CSS v4.
+  - Do NOT create tailwind.config.js. All configuration is in src/styles/global.css using @theme.
+  - Use Tailwind utility classes extensively.
+  - Never use the @apply directive if possible.
+
+  Performance Optimization
+  - Minimize use of client-side JavaScript.
+  - Use the client:* directives judiciously:
+    - client:load for immediately needed interactivity
+    - client:visible for components that should hydrate when visible
+
+  Data Fetching
+  - Use getCollection() to fetch data from Content Collections.
+  - Implement getStaticPaths() for fetching data at build time.
+
+  Key Conventions
+  1. Follow Astro's Style Guide.
+  2. Use TypeScript interfaces for Props.
+  3. Use Astro's Image component for optimized image delivery.

@@ -1,0 +1,146 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<Layout title={post.data.title} description={post.data.description}>
+  <!-- Прогресс-бар -->
+  <div class="fixed top-0 left-0 h-1 bg-brand-accent z-[60] w-full origin-left scale-x-0 animate-scroll-progress"></div>
+
+  <article class="min-h-screen pb-20">
+    <!-- Хедер -->
+    <div class="relative h-[60vh] min-h-[400px] w-full overflow-hidden">
+      <div class="absolute inset-0 bg-brand-bg/60 z-10"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-brand-bg to-transparent z-20"></div>
+      
+      {post.data.image && (
+        <img 
+          src={post.data.image} 
+          alt={post.data.title}
+          class="absolute inset-0 w-full h-full object-cover"
+        />
+      )}
+
+      <div class="relative z-30 h-full max-w-4xl mx-auto px-6 flex flex-col justify-end pb-12">
+        <a href="/blog" class="inline-flex items-center gap-2 text-white/70 hover:text-white mb-6 transition group">
+          <svg class="w-5 h-5 group-hover:-translate-x-1 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+          Назад в блог
+        </a>
+
+        <div class="flex flex-wrap gap-4 items-center text-sm text-brand-muted mb-4">
+          <time datetime={post.data.pubDate.toISOString()} class="flex items-center gap-1">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+            {post.data.pubDate.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' })}
+          </time>
+          {post.data.readTime && (
+            <span class="bg-white/10 px-2 py-1 rounded text-white">⏱ {post.data.readTime}</span>
+          )}
+        </div>
+
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-white">
+          {post.data.title}
+        </h1>
+
+        <div class="flex gap-2">
+          {post.data.tags?.map((tag: string) => (
+            <span class="text-sm font-medium px-3 py-1 rounded-full border border-white/20 bg-black/30 backdrop-blur-md text-white">
+              #{tag}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Контент -->
+    <div class="max-w-3xl mx-auto px-6 mt-12">
+      <div class="content-body">
+        <Content />
+      </div>
+
+      <!-- Автор -->
+      <div class="mt-16 pt-8 border-t border-white/10 flex items-center gap-4">
+        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-brand-accent to-purple-600 flex items-center justify-center text-xl font-bold text-white">
+          {post.data.author ? post.data.author[0] : 'R'}
+        </div>
+        <div>
+          <div class="font-bold text-white">{post.data.author || 'Run Swift Team'}</div>
+          <div class="text-sm text-brand-muted">Автоматизация и разработка</div>
+        </div>
+      </div>
+    </div>
+  </article>
+</Layout>
+
+<style>
+  /* Анимация скролла */
+  @keyframes scrollProgress {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+  .animate-scroll-progress {
+    animation: scrollProgress auto linear;
+    animation-timeline: scroll();
+  }
+
+  /* Стилизация контента (без @apply, чтобы не было ошибок) */
+  .content-body :global(h2) {
+    font-size: 1.875rem; /* text-3xl */
+    font-weight: 700;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    color: white;
+  }
+  .content-body :global(h3) {
+    font-size: 1.5rem; /* text-2xl */
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: white;
+  }
+  .content-body :global(p) {
+    font-size: 1.125rem; /* text-lg */
+    line-height: 1.75;
+    color: #cbd5e1; /* text-slate-300 */
+    margin-bottom: 1.5rem;
+  }
+  .content-body :global(ul) {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: #cbd5e1;
+  }
+  .content-body :global(li) {
+    margin-bottom: 0.5rem;
+  }
+  .content-body :global(strong) {
+    color: #ff6d5a; /* brand-accent */
+    font-weight: 600;
+  }
+  .content-body :global(a) {
+    color: #60a5fa; /* blue-400 */
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .content-body :global(a:hover) {
+    color: #93c5fd;
+  }
+  .content-body :global(blockquote) {
+    border-left: 4px solid #ff6d5a;
+    padding-left: 1rem;
+    font-style: italic;
+    color: #94a3b8;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+</style>

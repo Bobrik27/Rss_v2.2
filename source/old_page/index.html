@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RunSwift Studio - Современные Сайты и Автоматизация Бизнеса</title>
+    <meta name="google-site-verification" content="76KL1Qyolm5wJMCsJO8swHJq_fz2HY2-UnrwesdP8uQ" />
+    <meta name="description"
+        content="RunSwift Studio: Разработка веб-сайтов и решения для автоматизации бизнес-процессов. Качественные сайты без конструкторов, оптимизация рутины.">
+
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@700;900&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/main.css">
+
+
+
+</head>
+
+<body>
+
+    <div class="preloader">
+        <div class="preloader__spinner"></div>
+
+    </div>
+
+    <div class="wrapper">
+
+        <!-- ================== Навигационное меню (Sticky Header) ================== -->
+        <nav class="main-nav">
+            <div class="container nav-container">
+
+                <!-- Кнопка Гамбургер (видна только на мобильных) -->
+                <button class="nav-toggle" aria-label="Открыть меню" aria-expanded="false">
+                    <span class="nav-toggle__line"></span>
+                    <span class="nav-toggle__line"></span>
+                    <span class="nav-toggle__line"></span>
+                </button>
+
+                <!-- Обертка для навигационных ссылок (для скрытия/показа) -->
+                <div class="nav-links-wrapper">
+                    <ul>
+                        <!-- Ссылки на существующие ID секций -->
+                        <li><a href="#start">На главную</a></li>
+                        <!-- <li><a href="#about-me">Обо мне</a></li> -->
+                        <li><a href="#portfolio">Портфолио</a></li>
+                        <li><a href="#automations">Автоматизации</a></li>
+                        <li><a href="blog.html">Блог</a></li>
+                        <li><a href="#footer-contact-form">Контакт</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </nav>
+        <!-- ================== Конец Навигационного меню ================== -->
+
+
+        <div class="content" id="start">
+
+            <!-- ================== Hero Section (ИЗМЕНЕНО) ================== -->
+            <header class="hero-section">
+                <div class="parallax-viewport">
+                    <div class="parallax-layer layer-far"></div>
+
+                    <canvas id="interactiveNetworkCanvas"></canvas>
+
+                    <div class="parallax-layer layer-mid">
+                    </div>
+
+
+                    <div class="hero-content">
+                        <div class="layer__header">
+                            <h1 class="layers__title">RunSwift Studio</h1>
+                        </div>
+                        <p class="hero-subtitle">Современные решения для вашего бизнеса</p>
+
+                    </div>
+
+
+
+                    <div class="parallax-layer layer-near">
+
+                    </div>
+                </div>
+            </header>
+            <!-- ================== Конец Hero Section ================== -->
+
+            <main>
+
+                <!-- ================== Intro Section ================== -->
+                <section class="intro-section animated-section" id="intro">
+                    <div class="container">
+                        <!-- <img src="/img/shark.png" alt="RunSwift Studio Icon" class="intro__icon"> -->
+                        <h2>Ваш надежный партнер в бизнесе</h2>
+                        <p>
+                            Мы в <strong>Run<span style="color: #FF7F50">S</span>wift Studio</strong> создаем не просто
+                            сайты, а эффективные инструменты для
+                            вашего бизнеса, используя современные технологии без шаблонов и конструкторов. А также
+                            предлагаем продуманные решения для оптимизации рутинных задач, освобождая ваше время для
+                            главного.
+                        </p>
+                    </div>
+                </section>
+                <!-- ================== Конец Intro Section ================== -->
+
+
+
+
+
+
+
+
+                <!-- <section class="about-me-section" id="about-me">
+                    <div class="container">
+
+                        <div class="about-me-grid">
+                            <aside class="about-me-sidebar">
+                                <div class="profile-photo-wrapper">
+                                    <img src="/img/3.jpg" width="150" height="150" alt="Мое фото" class="profile-photo">
+                                </div>
+                                <h3 class="profile-name">Георгий П.</h3>
+                                <nav class="about-me-nav">
+                                    <ul>
+
+                                        <li><a href="#study-content" data-content-id="study"
+                                                class="about-nav-link active js-no-smooth-scroll">Обо мне</a></li>
+                                        <li><a href="#hobby-content" data-content-id="hobby"
+                                                class="about-nav-link js-no-smooth-scroll">Разработка</a>
+                                        </li>
+                                        <li><a href="#contact-info-content" data-content-id="contact-info"
+                                                class="about-nav-link js-no-smooth-scroll">Связь со мной</a></li>
+
+
+                                    </ul>
+                                </nav>
+                            </aside>
+
+                            <div class="about-me-photos">
+                                <div class="photo-slider-wrapper">
+                                    <img src="/img/1.jpg" width="800" height="600" alt="Фото 1"
+                                        class="slider-image active">
+                                    <img src="/img//2.jpg" width="800" height="600" alt="Фото 2" class="slider-image">
+                                    <img src="/img//4.jpg" width="800" height="600" alt="Фото 3" class="slider-image">
+                                    
+                                </div>
+                            </div>
+
+                            
+                            <article class="about-me-content">
+                                <div id="study-content" class="content-panel active">
+                                    <h4>Обо мне</h4>
+                                    <p>Меня зовут Георгий, живу в Барнауле. Я веб-разработчик и сертифицированный
+                                        Software Developer Assistant. Моя цель —
+                                        создавать современные и функциональные сайты, а также внедрять
+                                        автоматизированные решения для оптимизации
+                                        бизнес-процессов.</p>
+                                    <p>Я стремлюсь к постоянному развитию и открыт для новых вызовов. Мои клиенты ценят
+                                        мой индивидуальный подход и внимание к деталям. Вместе мы можем превратить ваши
+                                        идеи в эффективные цифровые решения.</p>
+                                </div>
+                                <div id="hobby-content" class="content-panel">
+                                    <h4>Чем я могу быть полезен</h4>
+                                    <p>Разработка веб-сайтов: Создание адаптивных и SEO-оптимизированных сайтов, которые
+                                        отражают уникальность вашего бизнеса.</p>
+                                    <p>Автоматизация процессов: Внедрение решений для автоматизации рутинных задач, что
+                                        позволяет сэкономить время и ресурсы.</p>
+                                    <p>Поддержка и сопровождение: Обеспечение стабильной работы ваших цифровых продуктов
+                                        и оперативное внесение необходимых изменений.</p>
+                                </div>
+                                <div id="contact-info-content" class="content-panel">
+                                    <h4>Связь со мной</h4>
+                                    <p>Я открыт для сотрудничества и всегда рад новым проектам. Связаться со мной можно
+                                        следующим образом:</p>
+                                    <p>почта:@yourusername." <br>
+                                        Телеграм:023940239402934 <br> <br>
+                                        а так же можно заполнить форму в конце страницы</p>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </section> -->
+
+
+
+
+
+
+                <!-- ================== CTA Section ================== -->
+                <!-- <section class="cta-section animated-section" id="contact-cta">
+                    <div class="container">
+                        <h2>Обсудим ваш проект?</h2>
+                        <p>
+                            Расскажите нам о ваших задачах, и мы предложим лучшее решение для вашего бизнеса.
+                        </p>
+                        <a href="#footer-contact-form" class="button button--main">Связаться с нами</a>
+                    </div>
+                </section> -->
+                <!-- ================== Конец CTA Section ================== -->
+
+
+
+
+
+
+
+
+
+
+
+                <!-- ================== Portfolio Section ================== -->
+                <section class="portfolio-section" id="portfolio">
+                    <div class="container">
+                        <h2 class="section-title">Портфолио</h2>
+                        <p class="section-subtitle">Работы, созданные с нуля, без шаблонов и ограничений. Только чистый
+                            код и уникальные решения для вашего бизнеса</p>
+                        <div class="portfolio-gallery">
+                            <!-- Левая колонка -->
+                            <div class="gallery-column gallery-column--left" data-speed="0.9">
+                                <a class="gallery-item gallery-item--link">
+                                    <img src="/img/portfolio/graf/bright-golden-paperclip-standing-out-from-silver-clips-black-background.jpg"
+                                        width="1200" height="800" alt="Пример дизайна веб-сайта 1" loading="lazy">
+                                </a>
+                                <div class="gallery-item text-block">
+                                    <h3 class="text-block__h">Ваш Бизнес Уникален – Ваш Сайт Тоже!</h3>
+                                    <p class="text-block__p">Забудьте о "типовых решениях". Мы создаем дизайн, который
+                                        на 100% отражает суть вашего бренда и говорит с вашей аудиторией на одном языке.
+                                        Это не просто красивая картинка, а <strong>фундамент доверия и
+                                            узнаваемости</strong> в онлайн-пространстве. Мы понимаем, что у каждого
+                                        бизнеса свои задачи и своя специфика, поэтому предлагаем не "коробочный"
+                                        продукт, а <strong>индивидуально спроектированный инструмент</strong>. Ваш сайт
+                                        будет точно соответствовать вашим целям, помогая эффективно решать задачи и
+                                        привлекать именно тех клиентов, которые вам нужны.</p>
+                                </div>
+                                <a class="gallery-item gallery-item--link">
+                                    <img src="/img/portfolio/graf/112.jpg " width="1200" height="800"
+                                        alt="Абстрактный дизайн" loading="lazy">
+                                </a>
+                            </div>
+                            <!-- Средняя колонка -->
+                            <div class="gallery-column gallery-column--middle" data-speed="1.0">
+                                <a class="gallery-item gallery-item--link">
+                                    <img src="/img/portfolio/graf/road-with-blur-effect.jpg" width="1200" height="800"
+                                        alt="Пример дизайна веб-сайта 3" loading="lazy">
+                                </a>
+                                <a class="gallery-item gallery-item--link">
+                                    <img src="/img/portfolio/graf/road-tunnel-night-illuminated.jpg" width="1200"
+                                        height="800" alt="Абстрактная 3D графика" loading="lazy">
+                                </a>
+                                <div class="gallery-item text-block">
+                                    <h3 class="text-block__h">Скорость, Которая Приносит Клиентов</h3>
+                                    <p class="text-block__p">В современном мире каждая секунда загрузки на счету – это
+                                        ваше преимущество или преимущество конкурентов. Мы создаем <strong>молниеносно
+                                            быстрые сайты</strong>, избавляясь от "мусора" шаблонных решений, который
+                                        неизбежно тормозит работу. Наши сайты основаны на чистом, эффективном коде, что
+                                        позволяет им <strong>мгновенно реагировать на действия пользователя</strong> и
+                                        высоко ценится поисковыми системами вроде Google. Быстрый сайт не только
+                                        удерживает внимание посетителей, но и получает <strong>бонус к
+                                            ранжированию</strong>, что означает больше органического трафика. Результат
+                                        – довольные посетители, высокие позиции в поиске и, главное, <strong>больше
+                                            заявок и продаж</strong> для вашего бизнеса. </p>
+                                </div>
+                            </div>
+                            <!-- Правая колонка -->
+                            <div class="gallery-column gallery-column--right" data-speed="1.1">
+                                <a class="gallery-item gallery-item--link">
+                                    <img src="/img/portfolio/graf/black-balloon-orange-background.jpg" width="1200"
+                                        height="800" alt="Абстрактный дизайн фона" loading="lazy">
+                                </a>
+                                <div class="gallery-item text-block">
+                                    <h3 class="text-block__h">Сайт, Готовый к Вашим Амбициям</h3>
+                                    <p class="text-block__p">Ваш бизнес растет – и ваш сайт должен расти вместе с ним, а
+                                        не становиться узким местом, ограничивающим ваши возможности. Индивидуальная
+                                        разработка дает <strong>полную свободу для масштабирования</strong>: от
+                                        добавления новых разделов и функций до сложных интеграций с CRM, платежными
+                                        системами или любыми другими необходимыми сервисами. Вам не придется
+                                        "переезжать" на другую платформу или мириться с ограничениями тарифа, когда
+                                        возникнет потребность в развитии. Мы закладываем <strong>гибкую
+                                            архитектуру</strong>, которая позволяет легко адаптировать сайт под ваши
+                                        будущие задачи, обеспечивая вам спокойствие и уверенность в завтрашнем дне. Это
+                                        профессиональный подход, как в крупном бизнесе, созданный для вашего
+                                        долгосрочного успеха.
+                                    </p>
+                                </div>
+                                <a class="gallery-item gallery-item--link">
+                                    <img src="/img/portfolio/graf/artistic3d.jpg" width="1200" height="800"
+                                        alt="Геометрический фон" loading="lazy">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="section-cta">
+                            <a href="portfolio.html" class="button button--main" target="_blank">Смотреть проекты</a>
+                        </div>
+                    </div>
+                </section>
+                <!-- ================== Конец Portfolio Section ================== -->
+
+
+
+
+
+
+                <!-- ================== Divider Section 1 ================== -->
+                <section class="divider-section animated-section" id="divider1">
+                    <div class="container">
+                        <h2>Оптимизация - ключ к эффективности</h2>
+                        <p>
+                            Автоматизация повторяющихся задач позволяет вашей команде сосредоточиться на стратегическом
+                            развитии и креативных решениях.
+                        </p>
+                    </div>
+                </section>
+                <!-- ================== Конец Divider Section 1 ================== -->
+
+
+
+
+
+
+
+
+                <!-- ================== Automations Section ================== -->
+                <section class="automations-section" id="automations">
+                    <div class="container">
+                        <h2 class="section-title">Решения для Автоматизации</h2>
+                        <p class="section-subtitle">Освободите свое время для важных задач.</p>
+                        <div class="automations-grid">
+                            <!-- Карточка 1 -->
+                            <div class="automation-card">
+                                <div class="automation-card__image-wrapper">
+                                    <img src="/img/autom/image-1.png" width="600" height="400"
+                                        alt="Абстрактные бумажные формы" class="automation-card__image" loading="lazy">
+                                </div>
+                                <div class="automation-card__content">
+                                    <h3 class="automation-card__title">Автоматический сбор заявок в вашу базу</h3>
+                                    <p class="automation-card__description">Все заявки с вашего сайта (контактные формы,
+                                        формы записи, квизы) или даже из комментариев в соцсетях автоматически попадают
+                                        в удобную таблицу (например, Google Sheets, Airtable) или вашу CRM. Вы
+                                        моментально получаете уведомление в Telegram или на почту.</p>
+                                    <a href="automations.html" class="button button--secondary" target="_blank">Узнать
+                                        больше</a>
+                                </div>
+                            </div>
+                            <!-- Карточка 2 -->
+                            <div class="automation-card">
+                                <div class="automation-card__image-wrapper">
+                                    <img src="/img/autom/image-2.png" width="600" height="400" alt="Аниме пейзаж луны"
+                                        class="automation-card__image" loading="lazy">
+                                </div>
+                                <div class="automation-card__content">
+                                    <h3 class="automation-card__title">Умный Telegram-бот для ответов и записи</h3>
+                                    <p class="automation-card__description">Создаем чат-бота в Telegram, который
+                                        отвечает на частые вопросы клиентов, помогает им выбрать услугу, записывает на
+                                        консультацию/сеанс прямо в ваш Google Календарь и присылает вам уведомление.</p>
+                                    <a href="automations.html" class="button button--secondary" target="_blank">Узнать
+                                        больше</a>
+                                </div>
+                            </div>
+                            <!-- Карточка 3 -->
+                            <div class="automation-card">
+                                <div class="automation-card__image-wrapper">
+                                    <img src="/img/autom/image-3.png" width="600" height="400"
+                                        alt="Горы Вестрахорн, Исландия" class="automation-card__image" loading="lazy">
+                                </div>
+                                <div class="automation-card__content">
+                                    <h3 class="automation-card__title">Автоматическая серия приветственных писем</h3>
+                                    <p class="automation-card__description">Как только человек подписывается на вашу
+                                        рассылку или оставляет заявку, ему автоматически уходит серия из 2-3 писем: с
+                                        благодарностью, полезной информацией о вас/вашей услуге, специальным
+                                        предложением.</p>
+                                    <a href="automations.html" class="button button--secondary" target="_blank">Узнать
+                                        больше</a>
+                                </div>
+                            </div>
+                            <!-- Карточка 4 -->
+                            <div class="automation-card">
+                                <div class="automation-card__image-wrapper">
+                                    <img src="/img/autom/img-4.jpg" width="600" height="400"
+                                        alt="Абстрактные бумажные формы" class="automation-card__image" loading="lazy">
+                                </div>
+                                <div class="automation-card__content">
+                                    <h3 class="automation-card__title">Автоматическая публикация постов в соцсети
+                                        Telegram
+                                    </h3>
+                                    <p class="automation-card__description">Вы готовите контент заранее (например, в
+                                        Google Sheets или Notion), а система автоматически публикует его в указанное
+                                        время в ваших соцсетях (ВКонтакте, Telegram и др.).</p>
+                                    <a href="automations.html" class="button button--secondary" target="_blank">Узнать
+                                        больше</a>
+                                </div>
+                            </div>
+                            <!-- Карточка 5 -->
+                            <div class="automation-card">
+                                <div class="automation-card__image-wrapper">
+                                    <img src="/img/autom/img-9.png" width="600" height="400" alt="Аниме пейзаж луны"
+                                        class="automation-card__image" loading="lazy">
+                                </div>
+                                <div class="automation-card__content">
+                                    <h3 class="automation-card__title">Синхронизация
+                                        календарей и уведомления клиентам</h3>
+                                    <p class="automation-card__description">Автоматически создаем события в вашем
+                                        основном календаре (например, Google Calendar) на основе записей из других
+                                        источников (сайт, бот). Направляем клиентам автоматические напоминания о
+                                        предстоящей встрече/консультации.</p>
+                                    <a href="automations.html" class="button button--secondary" target="_blank">Узнать
+                                        больше</a>
+                                </div>
+                            </div>
+                            <!-- Карточка 6 -->
+                            <div class="automation-card">
+                                <div class="automation-card__image-wrapper">
+                                    <img src="/img/autom/img-11.jpg" width="600" height="400"
+                                        alt="Горы Вестрахорн, Исландия" class="automation-card__image" loading="lazy">
+                                </div>
+                                <div class="automation-card__content">
+                                    <h3 class="automation-card__title">Автоматический запрос обратной связи после услуги
+                                    </h3>
+                                    <p class="automation-card__description">Через день-два после оказания услуги (или
+                                        завершения онлайн-курса) клиенту автоматически приходит письмо или сообщение в
+                                        мессенджер с просьбой оставить отзыв и ссылкой на нужную площадку (ваш сайт,
+                                        соцсети, Google Карты).</p>
+                                    <a href="automations.html" class="button button--secondary" target="_blank">Узнать
+                                        больше</a>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="section-cta">
+                            <a href="automations.html" class="button button--main" target="_blank">Все решения</a>
+                        </div>
+                    </div>
+                </section>
+                <!-- ================== Конец Automations Section ================== -->
+
+
+
+
+
+
+                <!-- ================== CTA Section ================== -->
+                <section class="cta-section animated-section" id="contact-cta">
+                    <div class="container">
+                        <h2>Обсудим ваш проект?</h2>
+                        <p>
+                            Расскажите нам о ваших задачах, и мы предложим лучшее решение для вашего бизнеса.
+                        </p>
+                        <a href="#footer-contact-form" class="button button--main">Связаться с нами</a>
+                    </div>
+                </section>
+
+
+
+
+
+
+
+                <!-- ================== Footer Section ================== -->
+                <footer class="footer-section" id="footer">
+                    <div class="container">
+                        <!-- Основная сетка футера -->
+                        <div class="footer-grid">
+                            <!-- Колонка 1: Навигация -->
+                            <div class="footer-column footer-column--nav">
+                                <div>
+                                    <!-- <h4 class="footer-heading">Навигация</h4>
+                                <ul>
+                                    <li><a href="#intro">Обо мне</a></li>
+                                    <li><a href="#portfolio">Портфолио</a></li>
+                                    <li><a href="#automations">Автоматизации</a></li>
+                                    <li><a href="#footer-contact-form">Контакт</a></li>
+                                </ul> -->
+                                </div>
+                            </div>
+                            <!-- Колонка 2: Контактная форма -->
+                            <div class="footer-column footer-column--connect footer-card">
+                                <div>
+                                    <h4 class="footer-heading">Свяжитесь со мной</h4>
+                                    <form action="#" method="POST" class="contact-form" id="footer-contact-form"
+                                        novalidate>
+                                        <div class="form-group">
+                                            <label for="footer-name" class="form-label">Имя:</label>
+                                            <input type="text" id="footer-name" name="name" class="form-input" required
+                                                aria-describedby="name-error">
+                                            <div class="error-message" id="name-error"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="footer-contact" class="form-label">Телефон или Email:</label>
+                                            <input type="text" id="footer-contact" name="contact" class="form-input"
+                                                required aria-describedby="contact-error">
+                                            <div class="error-message" id="contact-error"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="footer-message" class="form-label">Сообщение:</label>
+                                            <textarea id="footer-message" name="message" class="form-textarea" rows="4"
+                                                required aria-describedby="message-error"></textarea>
+                                            <div class="error-message" id="message-error"></div>
+                                        </div>
+                                        <button type="submit" class="button button--main form-button">Отправить</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- Колонка 3: Соцсети -->
+                            <div class="footer-column footer-column--socials">
+                                <!-- <div>
+                                <h4 class="footer-heading footer-heading--social">Мы в соцсетях</h4>
+                                <div class="footer-socials">
+                                    < <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Telegram">Tg</a>
+                                        <a href="#" target="_blank" rel="noopener noreferrer"
+                                            aria-label="YouTube">Yt</a>
+                                        <a href="#" target="_blank" rel="noopener noreferrer"
+                                            aria-label="Pinterest">Pi</a>
+                                </div>
+                            </div> -->
+                            </div>
+                        </div>
+                        <!-- Блок Бренда -->
+                        <div class="footer-brand-bottom">
+
+                            <p class="footer-copyright">
+                                © RunSwift Studio <span id="current-year"></span>.<br> Все права защищены.
+                            </p>
+                        </div>
+                    </div> <!-- /.container -->
+                </footer>
+                <!-- ================== Конец Footer Section ================== -->
+
+        </div> <!-- /.content -->
+    </div> <!-- /.wrapper -->
+
+    <!-- JavaScript -->
+    <!-- GSAP Libraries -->
+    <script src="libs/gsap/gsap.min.js" defer></script>
+    <script src="libs/gsap/ScrollTrigger.min.js" defer></script>
+    <script src="libs/gsap/ScrollSmoother.min.js" defer></script>
+
+    <script src="js/utils.js" defer></script>
+    <script src="js/interactive-network.js" defer></script>
+    <script src="js/gsap-init.js" defer></script>
+    <script src="js/about-me-functionality.js" defer></script>
+    <script src="js/hero-animations.js" defer></script>
+    <script src="js/header-scroll.js" defer></script>
+    <script src="js/portfolio-animations.js" defer></script>
+    <script src="js/section-animations.js" defer></script>
+    <script src="js/form-validation.js" defer></script>
+    <script src="js/smooth-scroll.js" defer></script>
+    <script src="js/mobile-menu.js" defer></script>
+
+</body>
+
+</html>

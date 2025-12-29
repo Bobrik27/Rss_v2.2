@@ -1,0 +1,574 @@
+/* css/portfolio.css */
+
+/* --- Base & Variables --- */
+:root {
+    --text-dark-portfolio: #FFFFFF;
+    --text-link-portfolio: #E12878;
+    --text-muted-portfolio: #FFFFFF;
+    --text-argument-description: #858d94;
+    --background-light-portfolio: #191919;
+    --background-section-alt: #222222;
+    --background-arguments-section: #222222;
+    /* Для чередования фона секций */
+    --border-light-portfolio: #E9ECEF;
+    --font-primary-portfolio: 'Montserrat', sans-serif;
+    --secondary-cyan: #E12878;
+    /* Из прошлого проекта, может пригодиться */
+}
+
+/* Basic Reset & Body Styles */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-primary-portfolio);
+    color: var(--text-dark-portfolio);
+    line-height: 1.7;
+    background-color: var(--background-light-portfolio);
+    overflow-x: hidden;
+    /* Добавляем, как на главной */
+}
+
+.wrapper {
+    /* Обычно не требует стилей, но можно задать position: relative, если нужно */
+}
+
+.content {
+    background-color: var(--background-light-portfolio);
+    /* Фон для контента */
+    overflow: hidden;
+    /* Важно для ScrollSmoother и предотвращения горизонтального скролла */
+    /* will-change: transform; */
+    /* Можно добавить, если будут сложные анимации */
+}
+
+.container {
+    /* Используется в info-blocks и arguments-section */
+    width: 90%;
+    max-width: 1540px;
+    /* Твое значение */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* --- Portfolio Page Header --- */
+.portfolio-page-header {
+    background-color: var(--background-light-portfolio);
+    padding: 20px 0;
+    border-bottom: 1px solid var(--secondary-cyan);
+}
+
+.portfolio-header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1540px;
+    margin: 0 auto;
+    padding: 0 15px;
+    /* Чтобы соответствовать .container */
+}
+
+.portfolio-header-nav,
+.portfolio-header-placeholder {
+    flex: 1;
+}
+
+.portfolio-header-nav {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.portfolio-header-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+.portfolio-header-nav a {
+    text-decoration: none;
+    color: var(--text-muted-portfolio);
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.portfolio-header-nav a:hover {
+    color: var(--text-link-portfolio);
+}
+
+.portfolio-header-title {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--text-dark-portfolio);
+    letter-spacing: -1px;
+    text-align: center;
+    margin: 0;
+}
+
+.portfolio-header-placeholder {
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+/* --- Motivation Text Section --- */
+.motivation-text-section {
+    padding: 80px 0;
+    background-color: var(--background-section-alt);
+}
+
+.motivation-layout-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    /* Примерно 25% - 50% - 25% */
+    align-items: center;
+    gap: 20px;
+    width: calc(100% - 100px);
+    /* Отступы по 50px от краев экрана */
+    max-width: 1700px;
+    /* Твое значение, если оно больше .container */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.motivation-side-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.motivation-side-content img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    /* max-height: ТУТ МОЖНО ЗАДАТЬ, ЕСЛИ НАДО */
+}
+
+.motivation-text-content-main {
+    padding: 0 15px;
+    text-align: left;
+    /* Поменял на left для длинного текста */
+}
+
+.motivation-text-content-main p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #858d94;
+    /* color: var(--text-dark-portfolio); */
+    margin: 0;
+}
+
+
+/* --- Info Blocks Section --- */
+.info-blocks-section {
+    padding: 80px 0;
+    background-color: var(--background-light-portfolio);
+}
+
+.info-block {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 40px;
+    margin-bottom: 70px;
+}
+
+.info-block:last-child {
+    margin-bottom: 0;
+}
+
+.info-block.layout-text-left .info-block-text {
+    order: 1;
+}
+
+.info-block.layout-text-left .info-block-image-wrapper {
+    order: 2;
+}
+
+.info-block.layout-image-left .info-block-image-wrapper {
+    order: 1;
+}
+
+.info-block.layout-image-left .info-block-text {
+    order: 2;
+}
+
+.info-block-text {
+    flex: 1 1 450px;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+.info-block-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-dark-portfolio);
+    margin-bottom: 15px;
+    line-height: 1.3;
+}
+
+.info-block-text p {
+    font-size: 0.95rem;
+    color: #858d94;
+    line-height: 1.7;
+    margin-bottom: 25px;
+    flex-grow: 1;
+}
+
+.info-block-link {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-link-portfolio);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.3s ease, border-color 0.3s ease;
+    margin-top: auto;
+    align-self: flex-start;
+}
+
+.info-block-link:hover {
+    color: #a73f3b;
+    border-bottom-color: #a73f3b;
+}
+
+.info-block-image-wrapper {
+    flex: 1 1 500px;
+    min-width: 300px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 6px;
+    display: flex;
+}
+
+.info-block-image-wrapper .image-link-overlay {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    line-height: 0;
+    overflow: hidden;
+    border-radius: 6px;
+}
+
+.info-block-image-wrapper .image-link-overlay::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    opacity: 0;
+    transition: background-color 0.4s ease, opacity 0.4s ease;
+    z-index: 2;
+}
+
+.info-block-image-wrapper img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+    transition: transform 0.4s ease;
+    z-index: 1;
+    position: relative;
+}
+
+.info-block-image-wrapper .view-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    /* color: var(--text-light); */
+    color: #E32879;
+    padding: 12px 25px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease, background-color 0.3s ease;
+    z-index: 3;
+    white-space: nowrap;
+}
+
+.info-block-image-wrapper .image-link-overlay:hover img {
+    transform: scale(1.03);
+    /* opacity на img НЕ МЕНЯЕМ */
+}
+
+.info-block-image-wrapper .image-link-overlay:hover::after {
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 1;
+}
+
+/* Затемняющий оверлей */
+.info-block-image-wrapper .image-link-overlay:hover .view-button {
+    opacity: 1;
+    visibility: visible;
+    background-color: rgba(40, 40, 40, 0.75);
+}
+
+
+
+
+
+
+
+
+
+
+/* --- Arguments Section --- */
+.arguments-section {
+    padding: 80px 0;
+    background-color: var(--background-arguments-section);
+}
+
+.arguments-section .section-header {
+    margin-bottom: 60px;
+    /* Общий класс для заголовков секций */
+}
+
+.arguments-section .section-header .section-title {
+    font-size: 2.8rem;
+    color: var(--text-dark-portfolio);
+    margin-bottom: 15px;
+    /* Пример */
+}
+
+.arguments-section .section-header .section-subtitle {
+    font-size: 1rem;
+    color: var(--text-argument-description);
+    max-width: 800px;
+    margin: 0 auto;
+    /* Пример */
+}
+
+.arguments-grid {
+    display: grid;
+    gap: 30px;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.argument-card {
+    text-align: center;
+    padding: 20px;
+}
+
+.argument-icon-wrapper {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid var(--secondary-cyan);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px auto;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.argument-card:hover .argument-icon-wrapper {
+    background-color: var(--secondary-cyan);
+    border-color: var(--secondary-cyan);
+}
+
+.argument-card:hover .argument-icon-wrapper .argument-icon {
+    color: var(--text-light);
+}
+
+.argument-icon {
+    width: 36px;
+    height: 36px;
+    color: var(--secondary-cyan);
+    transition: color 0.3s ease;
+}
+
+.argument-title {
+    font-family: var(--font-primary-portfolio);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-dark-portfolio);
+    margin-bottom: 10px;
+}
+
+.argument-description {
+    font-size: 0.9rem;
+    color: var(--text-argument-description);
+    line-height: 1.7;
+}
+
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 992px) {
+    .portfolio-header-container {
+        /* Добавил max-width и отступы для .container */
+    }
+
+    .motivation-layout-wrapper {
+        grid-template-columns: 0.75fr 2.5fr 0.75fr;
+        gap: 15px;
+        width: calc(100% - 60px);
+    }
+
+    .info-block-text,
+    .info-block-image-wrapper {
+        flex-basis: 100%;
+        /* На планшетах могут начать складываться раньше */
+    }
+
+    .info-block {
+        gap: 30px;
+    }
+
+    .arguments-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .arguments-section {
+        padding: 60px 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .portfolio-page-header {
+        padding: 15px 0;
+    }
+
+    .portfolio-header-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .portfolio-header-nav,
+    .portfolio-header-placeholder {
+        flex: none;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .portfolio-header-nav ul {
+        justify-content: center;
+    }
+
+    .portfolio-header-title {
+        font-size: 2rem;
+        order: -1;
+    }
+
+    .portfolio-header-placeholder {
+        display: none;
+    }
+
+    .motivation-text-section {
+        padding: 50px 0;
+    }
+
+    .motivation-layout-wrapper {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        width: calc(100% - 40px);
+    }
+
+    .motivation-left-content {
+        order: 1;
+    }
+
+    .motivation-text-content-main {
+        order: 2;
+        text-align: center;
+    }
+
+    .motivation-right-content {
+        order: 3;
+    }
+
+    .motivation-side-content img {
+        max-width: 80%;
+        margin: 0 auto;
+    }
+
+    .motivation-text-content-main p {
+        font-size: 1rem;
+    }
+
+    .info-blocks-section {
+        padding: 60px 0;
+    }
+
+    .info-block {
+        flex-direction: column;
+        margin-bottom: 50px;
+        align-items: center;
+    }
+
+    .info-block-text,
+    .info-block-image-wrapper {
+        order: 0 !important;
+        flex-basis: 100% !important;
+    }
+
+    /* Важно для сброса чередования */
+    .info-block-text {
+        text-align: center;
+    }
+
+    .info-block-link {
+        margin-top: 15px;
+        align-self: center;
+    }
+
+    .info-block-image-wrapper {
+        height: 300px;
+    }
+
+    .arguments-section {
+        padding: 60px 0;
+    }
+
+    .arguments-section .section-header .section-title {
+        font-size: 2.4rem;
+    }
+
+    .arguments-section .section-header .section-subtitle {
+        font-size: 0.95rem;
+    }
+
+    .arguments-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .argument-icon-wrapper {
+        width: 70px;
+        height: 70px;
+        margin-bottom: 20px;
+    }
+
+    .argument-icon {
+        width: 32px;
+        height: 32px;
+    }
+
+    .argument-title {
+        font-size: 1.1rem;
+    }
+}

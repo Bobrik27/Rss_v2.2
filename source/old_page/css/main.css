@@ -1,0 +1,2104 @@
+/* ======================================== */
+/* === Глобальные Стили и Переменные ==== */
+/* ======================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Цветовая Палитра */
+    --bg-color: #191919;
+    /*основной темный*/
+    /*SectionsBG*/
+    --intro-section: #222222;
+    --text-color: #EAEAEA;
+    --text-text-block: #858d94;
+    --accent-bright: #FF7F50;
+    --accent-warm: #E07A5F;
+    --accent-grey: #8D8780;
+    --card-bg: #191919;
+    /* Usually same as --bg-color or slightly different */
+    --border-color: #333;
+    /* Darker border for elements on dark bg */
+    --accent-bright-rgb: 255, 127, 80;
+
+
+    /* Slightly lighter than main bg for contrast */
+
+    /* Типографика (Переменные) */
+    --font-primary: 'Inter', sans-serif;
+    --font-headings: 'Poppins', sans-serif;
+
+    --fz-base: clamp(1rem, 1vw + 0.5rem, 1.1rem);
+    --fz-sm: calc(var(--fz-base) * 0.85);
+    --fz-xs: calc(var(--fz-base) * 0.75);
+
+    --fz-h1-lg: clamp(3rem, calc(var(--index) * 4.2), 6rem);
+    /* Adjusted for new hero */
+    --fz-h1-sm: clamp(2.2rem, calc(var(--index) * 3.2), 4.2rem);
+    /* Adjusted for new hero */
+
+    --fz-h2-lg: clamp(2rem, var(--index) * 2, 3rem);
+    --fz-h2-md: clamp(1.8rem, var(--index) * 1.8, 2.5rem);
+    --fz-h2-sm: clamp(1.6rem, var(--index) * 1.6, 2.2rem);
+    --fz-h2-xs: clamp(1.5rem, var(--index) * 1.6, 2rem);
+
+    --fz-h3-lg: clamp(1.1rem, var(--index) * 1.2, 1.5rem);
+    --fz-h3-md: clamp(1.1rem, var(--index) * 1.2, 1.4rem);
+    --fz-h3-sm: clamp(1rem, var(--index) * 1.1, 1.3rem);
+
+    --fz-h4: clamp(1rem, var(--index) * 1, 1.2rem);
+    --fz-h4-sm: clamp(0.9rem, var(--index) * 0.9, 1.1rem);
+
+    /* Прочее */
+    --index: calc(1vw + 1vh);
+    /* --transition: transform .75s cubic-bezier(.075, .5, 0, 1); -- GSAP will handle transitions for parallax */
+    /* --scrollTop: 0px; -- No longer needed for manual parallax */
+    --border-radius: 8px;
+    --section-padding: calc(var(--index) * 5) 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-primary);
+    line-height: 1.6;
+    font-size: var(--fz-base);
+    overflow-x: hidden;
+}
+
+
+
+
+
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-color);
+    /* Твой основной фон */
+    z-index: 99999;
+    /* Выше всего остального */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s ease-out, visibility 0s linear 0.5s;
+    /* Плавное исчезновение */
+}
+
+.preloader--hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.preloader__spinner {
+    transform: rotateZ(45deg);
+    perspective: 1000px;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    color: #fff;
+}
+
+.preloader__spinner:before,
+.preloader__spinner:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: inherit;
+    height: inherit;
+    border-radius: 50%;
+    transform: rotateX(70deg);
+    animation: 1s spin linear infinite;
+}
+
+.preloader__spinner:after {
+    color: #FF3D00;
+    transform: rotateY(70deg);
+    animation-delay: .4s;
+}
+
+@keyframes rotate {
+    0% {
+        transform: translate(-50%, -50%) rotateZ(0deg);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotateZ(360deg);
+    }
+}
+
+@keyframes rotateccw {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotate(-360deg);
+    }
+}
+
+@keyframes spin {
+
+    0%,
+    100% {
+        box-shadow: .2em 0px 0 0px currentcolor;
+    }
+
+    12% {
+        box-shadow: .2em .2em 0 0 currentcolor;
+    }
+
+    25% {
+        box-shadow: 0 .2em 0 0px currentcolor;
+    }
+
+    37% {
+        box-shadow: -.2em .2em 0 0 currentcolor;
+    }
+
+    50% {
+        box-shadow: -.2em 0 0 0 currentcolor;
+    }
+
+    62% {
+        box-shadow: -.2em -.2em 0 0 currentcolor;
+    }
+
+    75% {
+        box-shadow: 0px -.2em 0 0 currentcolor;
+    }
+
+    87% {
+        box-shadow: .2em -.2em 0 0 currentcolor;
+    }
+}
+
+
+
+
+
+
+
+
+
+.wrapper {
+    /* overflow: hidden; - Not needed here if .content has it */
+}
+
+.content {
+    will-change: transform;
+    /* Hint for ScrollSmoother */
+    background-color: var(--bg-color);
+    overflow: hidden;
+    /* Prevent content from spilling and causing horizontal scroll */
+
+}
+
+
+/* ======================================== */
+/* ========= Утилитарные Классы ========== */
+/* ======================================== */
+.container {
+    max-width: 1560px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.container h2 {
+    text-transform: uppercase;
+}
+
+.section-title {
+    font-family: var(--font-headings);
+    font-size: var(--fz-h2-lg);
+    font-weight: 700;
+    color: var(--accent-bright);
+    text-align: center;
+    margin-bottom: calc(var(--index) * 0.5);
+}
+
+.section-subtitle {
+    font-size: var(--fz-base);
+    text-align: center;
+    color: var(--text-color);
+    opacity: 0.8;
+    margin-bottom: calc(var(--index) * 2.5);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.section-cta {
+    text-align: center;
+    margin-top: calc(var(--index) * 2.5);
+}
+
+.button {
+    display: inline-block;
+    padding: calc(var(--index) * 0.6) calc(var(--index) * 1.5);
+    font-family: var(--font-primary);
+    font-size: var(--fz-sm);
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    border: 1px solid transparent;
+    text-align: center;
+}
+
+.button--main {
+    background-color: var(--accent-bright);
+    color: var(--bg-color);
+    /* Changed to --bg-color for better contrast */
+    border-color: var(--accent-bright);
+    padding: calc(var(--index) * 0.8) calc(var(--index) * 2);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.button--main:hover {
+    background-color: var(--accent-warm);
+    border-color: var(--accent-warm);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.button--secondary {
+    background-color: transparent;
+    color: var(--accent-bright);
+    border-color: var(--accent-bright);
+}
+
+.button--secondary:hover {
+    background-color: var(--accent-bright);
+    color: var(--bg-color);
+    /* Changed to --bg-color */
+    transform: translateY(-1px);
+}
+
+
+/* ======================================== */
+/* ========= Header Navigation ========== */
+/* ======================================== */
+.main-nav {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    /* Ensure nav is above parallax layers */
+    padding: calc(var(--index) * 0.8) 0;
+    background-color: transparent;
+    /* Initially transparent */
+    transition: background-color 0.4s ease, padding 0.4s ease, box-shadow 0.4s ease, border-bottom-color 0.4s ease;
+    /* Added border-bottom-color */
+    border-bottom: 1px solid transparent;
+    /* Start with a transparent border */
+}
+
+.main-nav--scrolled {
+    background-color: rgba(25, 25, 25, 0.85);
+    /* var(--bg-color) with alpha for blur effect */
+    padding: calc(var(--index) * 0.5) 0;
+    border-bottom-color: var(--border-color);
+    /* Use defined border color */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    position: relative;
+}
+
+.nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    padding: 10px;
+    margin: 0;
+    cursor: pointer;
+    z-index: 1010;
+    /* Above mobile menu overlay */
+    position: relative;
+    /* For positioning lines */
+    width: 40px;
+    height: 40px;
+}
+
+.nav-toggle:focus {
+    outline: 2px solid var(--accent-bright);
+    outline-offset: 2px;
+}
+
+.nav-toggle__line {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: var(--text-color);
+    margin: 5px auto;
+    position: relative;
+    transition: transform 0.3s ease, background-color 0.3s ease, opacity 0.3s ease;
+    border-radius: 1px;
+}
+
+.nav-links-wrapper {
+    text-transform: uppercase;
+    /* Desktop styles by default */
+}
+
+.nav-links-wrapper ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: calc(var(--index) * 1.5);
+}
+
+.nav-links-wrapper a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: var(--fz-sm);
+    font-weight: 600;
+    padding: 5px 0;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-links-wrapper a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    /* Adjusted for better visual */
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent-bright);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+.nav-links-wrapper a:hover {
+    color: var(--accent-bright);
+}
+
+.nav-links-wrapper a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+
+/* ======================================== */
+/* ======= Адаптация Навигации ========== */
+/* ======================================== */
+@media (max-width: 991px) {
+    .nav-container {
+        justify-content: flex-end;
+    }
+
+    .nav-toggle {
+        display: block;
+    }
+
+    .nav-links-wrapper {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        /* Or 100dvh for newer browsers if issues on mobile */
+        background-color: rgba(25, 25, 25, 0.95);
+        /* var(--bg-color) with alpha */
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        z-index: 1005;
+        /* Below toggle button, above content */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-100%);
+        transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s ease;
+    }
+
+    .nav-links-wrapper ul {
+        flex-direction: column;
+        gap: calc(var(--index) * 2);
+    }
+
+    .nav-links-wrapper a {
+        font-size: clamp(1.6rem, var(--index) * 1.6, 2.2rem);
+        font-weight: 700;
+        padding: 10px 20px;
+    }
+
+    .nav-links-wrapper a::after {
+        display: none;
+        /* No underline effect for mobile menu items */
+    }
+
+    body.nav-open .nav-links-wrapper {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    body.nav-open .nav-toggle__line:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+
+    body.nav-open .nav-toggle__line:nth-child(2) {
+        opacity: 0;
+    }
+
+    body.nav-open .nav-toggle__line:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+
+    body.nav-open {
+        overflow: hidden;
+        /* Prevent scrolling of body when mobile menu is open */
+    }
+}
+
+@media (min-width: 992px) {
+
+    /* Ensure mobile-specific styles are reset for desktop */
+    .nav-toggle {
+        display: none;
+    }
+
+    .nav-links-wrapper {
+        position: static;
+        width: auto;
+        height: auto;
+        background-color: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        display: block;
+        /* Or flex if needed, but current ul is flex */
+    }
+
+    .nav-links-wrapper ul {
+        flex-direction: row;
+        /* Already default for desktop */
+    }
+
+    .nav-links-wrapper a {
+        /* Restore desktop link styles */
+        font-size: var(--fz-sm);
+        font-weight: 600;
+        padding: 5px 0;
+    }
+
+    .nav-links-wrapper a::after {
+        /* Restore underline effect for desktop */
+        display: block;
+    }
+
+    body.nav-open {
+        /* Ensure body scroll is not locked on desktop if resized from mobile */
+        overflow: auto;
+    }
+}
+
+section[id],
+footer[id] {
+    scroll-margin-top: 90px;
+    /* Adjust based on sticky header height */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* ======================================== */
+/* =========== Стили Секций ============= */
+/* ======================================== */
+
+/* --- Hero Section (ОБНОВЛЕНО) --- */
+.hero-section {
+    color: var(--text-color);
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-color);
+    /* Ensure base background for the hero */
+}
+
+.hero-subtitle {
+    font-family: var(--font-primary);
+    /* Inter */
+    font-size: clamp(1rem, 1.2vw + 0.7rem, 1.3rem);
+    /* Responsive font size */
+    color: var(--text-text-block);
+    /* #858d94 - for good contrast but not too bright */
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: calc(var(--index) * 0.5);
+    /* Space below the main title */
+    margin-bottom: calc(var(--index) * 1.5);
+    /* Space before any potential CTA in hero */
+    letter-spacing: 0.5px;
+    font-weight: 400;
+    /* Regular weight for Inter */
+    max-width: 600px;
+    /* Prevent it from being too wide */
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 15px;
+    /* Ensure some padding on small screens */
+    will-change: transform, opacity;
+    /* Hint for GSAP animations */
+}
+
+/* Responsive adjustments for subtitle if needed */
+@media (max-width: 768px) {
+    .hero-subtitle {
+        font-size: clamp(0.9rem, 2vw + 0.5rem, 1.1rem);
+        margin-top: calc(var(--index) * 0.3);
+        margin-bottom: calc(var(--index) * 1);
+    }
+}
+
+.parallax-viewport {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    /* perspective: 1000px; */
+    /* Enable if using 3D transforms like translateZ */
+}
+
+.parallax-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    will-change: transform;
+    pointer-events: none;
+}
+
+.layer-far {
+    z-index: 1;
+    background-image: radial-gradient(circle at 1px 1px, rgba(133, 141, 148, 0.1) 0.5px, transparent 0);
+    /* --text-text-block with low alpha */
+    background-size: 35px 35px;
+    /* Slightly larger/sparser dust */
+}
+
+
+
+.layer-near {
+    z-index: 5;
+    /* Highest background layer */
+    /* Placeholder for brighter, distinct lines or particles (SVG/JS generated later) */
+    /* Example: A few subtle diagonal lines for now */
+    /*
+    background-image:
+        repeating-linear-gradient(
+            -30deg,
+            transparent,
+            transparent 15px,
+            rgba(var(--accent-bright-rgb), 0.03) 15px,
+            rgba(var(--accent-bright-rgb), 0.03) 17px
+        ),
+        repeating-linear-gradient(
+            30deg,
+            transparent,
+            transparent 15px,
+            rgba(var(--accent-warm-rgb), 0.03) 15px, /* Assuming --accent-warm-rgb exists or use hex with alpha */
+
+    /* rgba (var(--accent-warm-rgb), 0.03) 17px; */
+    background-size: 100px 100px;
+
+}
+
+.hero-content {
+    position: relative;
+    z-index: 4;
+    /* Between mid and near layers */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100%;
+    text-align: center;
+    pointer-events: none;
+    padding-top: clamp(15vh, 20vh, 25vh);
+    /* <<< НОВОЕ: отступ сверху, подбери значение */
+    /* Container itself doesn't need interaction */
+}
+
+.hero-logo {
+    width: clamp(80px, calc(var(--index) * 6.5), 190px);
+    /* Adjusted size */
+    height: auto;
+    margin-bottom: calc(var(--index) * 1.2);
+    /* Removed: position, transform, transition - GSAP handles this */
+    will-change: transform;
+    pointer-events: auto;
+    /* Logo might be a link */
+}
+
+.hero-section .layer__header {
+    position: relative;
+    /* Keep for potential pseudo-elements or specific positioning needs */
+    /* Removed: transform, transition - GSAP handles this */
+    will-change: transform;
+    padding: 0 10px;
+    width: 100%;
+    pointer-events: auto;
+    /* Text needs to be selectable */
+}
+
+
+
+
+
+
+/* === Hero Decorative Shapes on Near Layer === */
+
+
+
+
+
+
+
+
+
+.layers__title {
+    /* ... твои существующие стили для .layers__title ... */
+    /* Базовое состояние тени, если анимация будет очень тонкой или для fallback */
+    text-shadow:
+        0 0 7px rgba(var(--accent-bright-rgb), 0.4),
+        0 0 12px rgba(var(--accent-bright-rgb), 0.25),
+        0 0 20px rgba(var(--accent-bright-rgb), 0.15);
+    animation: titleGlow 3.5s infinite alternate ease-in-out;
+    /* Чтобы буквы не "прыгали" при изменении text-shadow, если они близко друг к другу */
+    letter-spacing: 0.5px;
+    /* Или подбери небольшое значение, которое хорошо смотрится */
+}
+
+@keyframes titleGlow {
+    from {
+        text-shadow:
+            0 0 5px rgba(var(--accent-bright-rgb), 0.3),
+            0 0 10px rgba(var(--accent-bright-rgb), 0.2),
+            0 0 15px rgba(var(--accent-bright-rgb), 0.1),
+            0 0 20px rgba(var(--accent-bright-rgb), 0.05);
+        /* Добавил еще один слой для мягкости */
+    }
+
+    to {
+        text-shadow:
+            0 0 10px rgba(var(--accent-bright-rgb), 0.6),
+            /* Ярче в "пике" */
+            0 0 20px rgba(var(--accent-bright-rgb), 0.4),
+            0 0 30px rgba(var(--accent-bright-rgb), 0.25),
+            0 0 40px rgba(var(--accent-bright-rgb), 0.1);
+        /* Более широкое свечение */
+    }
+}
+
+
+
+
+
+
+
+
+.hero-section .layers__title {
+    font-size: var(--fz-h1-lg);
+    letter-spacing: normal;
+    /* Or calc(var(--index) * -0.02) if you want slight tightening */
+    font-weight: 900;
+    font-family: var(--font-headings);
+    font-synthesis: none;
+    /* Keep if you had issues with faux bold/italic */
+    text-transform: uppercase;
+    color: var(--text-color);
+    text-shadow: 0 3px 8px rgba(0, 0, 0, 0.45);
+    /* Slightly enhanced shadow */
+    line-height: 1.05;
+    /* Adjusted for tighter uppercase */
+    white-space: nowrap;
+    margin: 0;
+}
+
+.hero-section .layers__title .letter {
+    display: inline-block;
+    position: relative;
+    font-family: inherit;
+    font-weight: inherit;
+    font-synthesis: none;
+    margin-left: clamp(-28px, calc(var(--index) * 0.6), -8px);
+    /* Подбери MIN и MAX */
+    margin-right: clamp(-28px, calc(var(--index) * 0.6), -8px);
+    /* Подбери MIN и MAX */
+    opacity: 0;
+    transform: translateY(100%);
+    transition: opacity 0.8s cubic-bezier(0.2, 0.5, 0, 1),
+        transform 0.8s cubic-bezier(0.2, 0.5, 0, 1);
+    /* transition-delay will be set by JS */
+}
+
+.hero-section .layers__title .letter.letter--space {
+    margin-left: 0;
+    margin-right: 0;
+    opacity: 1;
+    transform: none;
+    transition: none;
+    padding-right: clamp(4px, calc(var(--index) * 2.38), 70px);
+    /* Подбери MIN и MAX */
+    /* Compensation */
+}
+
+.hero-section .layers__title.active .letter {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+.corner-accent {
+    position: absolute;
+
+    /* width: 60px;
+    height: 60px; */
+    z-index: 5;
+    /* Выше .hero-content (z-index: 4), чтобы быть поверх, если нужно перекрытие */
+    /* opacity: 0; */
+    /* opacity: 1; */
+    /* Изначально скрыты, GSAP будет анимировать появление */
+    /* pointer-events: none; */
+    /* overflow: visible; */
+    /* border: 1px dashed lime; */
+    /* Чтобы свечение не обрезалось */
+}
+
+.corner-bottom-left {
+    left: 850px;
+    bottom: 850px;
+}
+
+.corner-top-right {
+    right: 870px;
+    top: 230px;
+}
+
+/* .corner-top-left {
+    left: 850px;
+    top: 230px;
+}
+
+.corner-bottom-right {
+    right: 870px;
+    bottom: 850px;
+} */
+
+.corner-accent .ca-point {
+    fill: var(--accent-warm);
+    /* Точки акцентным цветом */
+    /* Можно добавить stroke, если нужно */
+    /* stroke: var(--text-color);
+    stroke-width: 0.5px; */
+}
+
+.corner-accent .ca-line {
+    stroke: var(--text-text-block);
+    /* Твой текущий цвет линий */
+    stroke-width: 1px;
+    stroke-dasharray: 2 3;
+    /* 3px штрих, 3px пробел - можно подобрать значения */
+}
+
+/* Путь для импульса изначально не видим */
+.corner-accent .ca-pulse-path {
+    /* stroke: transparent; уже в HTML */
+}
+
+/* Стили для "импульса" (маленького круга, который будет двигаться по path) */
+.ca-impulse {
+    fill: var(--accent-bright);
+    /* Можно добавить свечение для импульса */
+    /* filter: drop-shadow(0 0 3px var(--accent-bright)); */
+}
+
+/* .hero-section .layers__title.active .letter.letter--space is already correct */
+
+/* --- Адаптация Hero Title --- */
+@media (max-width: 767px) {
+    .hero-section .layers__title {
+        font-size: var(--fz-h1-sm);
+    }
+
+    .hero-section .layers__title .letter {
+        margin-left: calc(var(--index) * -0.22);
+        margin-right: calc(var(--index) * -0.22);
+    }
+
+    .hero-section .layers__title .letter.letter--space {
+        padding-right: calc(var(--index) * 0.22);
+    }
+
+    .hero-logo {
+        width: clamp(70px, calc(var(--index) * 6), 160px);
+    }
+
+    .hero-section .layer__header {
+        padding: 0 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-section .layers__title {
+        font-size: clamp(1.9rem, calc(var(--index) * 3), 3.6rem);
+        /* Further adjustment */
+    }
+
+    .hero-section .layers__title .letter {
+        margin-left: calc(var(--index) * -0.15);
+        margin-right: calc(var(--index) * -0.15);
+
+    }
+
+    .hero-section .layers__title .letter.letter--space {
+        padding-right: calc(var(--index) * 0.15);
+    }
+
+
+}
+
+
+
+@media (max-width: 400px) {
+    .hero-section .layers__title .letter {
+        margin-left: -1px;
+        margin-right: -1px;
+    }
+
+    .hero-section .layers__title .letter.letter--space {
+        padding-right: 0.3em;
+    }
+}
+
+
+
+
+
+
+
+/* --- Styles for Abstract SVG elements in Hero --- */
+.abstract-svg {
+    overflow: visible;
+    pointer-events: none;
+    will-change: transform, opacity;
+    opacity: 0;
+    /* GSAP будет анимировать появление */
+}
+
+/* --- Mid Layer Lines (старые линии, если они остаются) --- */
+.line-mid line {
+    stroke: var(--text-text-block);
+    stroke-width: 1.5px;
+    stroke-linecap: round;
+}
+
+.line-mid-1 line {}
+
+.line-mid-2 line {
+    stroke-width: 1px;
+}
+
+.line-mid-3 line {
+    stroke: var(--accent-warm);
+    stroke-width: 1px;
+}
+
+/* --- НОВЫЕ СТИЛИ: Mid Layer Node Points --- */
+.node-point circle {
+    fill: var(--text-text-block);
+    /* Основной цвет заливки для точек */
+    /* stroke: var(--accent-warm); */
+    /* Можно добавить обводку, если хочется */
+    /* stroke-width: 1px; */
+}
+
+.node-point-1 circle {
+    /* Пример индивидуальной стилизации */
+    /* fill: var(--accent-bright); */
+}
+
+.node-point-2 circle {
+    fill: var(--accent-warm);
+    /* Одна из точек акцентная */
+}
+
+
+/* --- НОВЫЕ СТИЛИ: Near Layer Card Shapes --- */
+.card-shape .card-outline {
+    /* Внешняя форма карточки */
+    stroke: var(--accent-bright);
+    /* Обводка карточки */
+    stroke-width: 1.5px;
+}
+
+.card-circle-1 .card-outline {
+    stroke: var(--text-color);
+    /* Другой цвет обводки для круглой карточки */
+}
+
+.card-shape .card-detail {
+    /* Внутренние детали карточек */
+    stroke: var(--text-text-block);
+    stroke-width: 1px;
+    opacity: 0.7;
+    /* Детали чуть менее заметны */
+    fill: none;
+    /* Большинство деталей - линии/обводки */
+}
+
+.card-shape .card-detail-accent {
+    /* Акцентные детали */
+    stroke: var(--accent-warm);
+    fill: rgba(var(--accent-warm-rgb), 0.3);
+    /* Полупрозрачная заливка для акцентных деталей */
+    /* Для path в круглой карточке fill будет виден */
+}
+
+/* Убираем stroke для залитого прямоугольника внутри карточки, если он не нужен */
+.card-rect-1 rect.card-detail-accent {
+    stroke: none;
+}
+
+.card-rect-1 .card-outline {
+    fill: rgba(var(--accent-bright-rgb), 0.3);
+    /* Более заметный фон */
+    stroke: var(--accent-bright);
+    /* Обводка */
+    stroke-width: 1.5px;
+}
+
+.card-circle-1 .card-outline {
+    fill: rgba(var(--text-text-block-rgb), 0.1);
+    /* Фон для круглой карточки */
+    stroke: var(--text-color);
+    stroke-width: 1.5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- Intro Section --- */
+.intro-section {
+    padding: var(--section-padding);
+    position: relative;
+    /* For z-index stacking context if needed later */
+    z-index: 10;
+    /* Ensure sections below hero are properly stacked */
+    background-color: var(--intro-section);
+    text-align: center;
+}
+
+.intro-section .intro__icon {
+    /* If you decide to add an icon */
+    width: clamp(50px, calc(var(--index) * 4.5), 90px);
+    height: auto;
+    margin-bottom: calc(var(--index) * 1.5);
+    opacity: 0.8;
+}
+
+.intro-section h2 {
+    font-family: var(--font-headings);
+    font-size: var(--fz-h2-md);
+    font-weight: 700;
+    margin-bottom: calc(var(--index) * 1);
+    color: var(--accent-bright);
+}
+
+.intro-section p {
+    font-size: var(--fz-base);
+    max-width: 950px;
+    margin: 0 auto;
+    line-height: 1.7;
+    opacity: 0.9;
+}
+
+.intro-section p strong {
+    font-weight: 600;
+    /* Inter 600 is semi-bold */
+    color: var(--text-color);
+    /* Brighter than paragraph text */
+    opacity: 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* styles.css или main.css */
+
+.about-me-section {
+    padding: var(--section-padding);
+    /* Используем твою переменную для отступов секции */
+    background-color: var(--bg-color);
+    /* Или var(--bg-color), если не нужно выделять фон */
+}
+
+.about-me-grid {
+    display: grid;
+    grid-template-columns: 0.8fr 1.5fr 1.2fr;
+    /* Соотношение колонок, можно настроить. Примерно 25% / 45% / 30% */
+    gap: calc(var(--index) * 2);
+    /* Отступ между колонками */
+    align-items: start;
+    /* Выравнивание по верху, если колонки разной высоты */
+}
+
+/* Левая колонка: Фото и Меню */
+.about-me-sidebar {
+    text-align: center;
+    padding: calc(var(--index) * 0.5) calc(var(--index) * 0.8);
+    /* Уменьшаем внутренние отступы */
+    display: flex;
+    /* Добавляем Flex для лучшего контроля над внутренними элементами */
+    flex-direction: column;
+    /* Элементы в столбец */
+    align-items: center;
+    /* Центрируем по горизонтали */
+    justify-content: flex-start;
+    /* Выравниваем по верху */
+}
+
+.profile-photo-wrapper {
+    width: 130px;
+    /* Можно немного уменьшить фото, если нужно больше места для меню */
+    height: 130px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto calc(var(--index) * 0.8);
+    /* Уменьшаем отступ снизу */
+    border: 3px solid var(--accent-bright);
+    box-shadow: 0 0 15px rgba(var(--accent-bright-rgb), 0.3);
+}
+
+.profile-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-name {
+    font-family: var(--font-headings);
+    font-size: var(--fz-h3-md);
+    /* Используем твои переменные для размеров шрифта */
+    color: var(--text-color);
+    margin-bottom: calc(var(--index) * 1.2);
+}
+
+.about-me-nav {
+    width: 100%;
+    /* Чтобы ссылки могли растягиваться, если нужно */
+}
+
+.about-me-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.about-me-nav li {
+    margin-bottom: calc(var(--index) * 0.4);
+    /* ЗНАЧИТЕЛЬНО УМЕНЬШАЕМ отступ между пунктами меню */
+}
+
+.about-me-nav .about-nav-link {
+    font-family: var(--font-primary);
+    font-size: var(--fz-base);
+    color: var(--text-text-block);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 6px 12px;
+    /* Уменьшаем padding у кнопок меню */
+    border-radius: var(--border-radius);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    display: block;
+    /* Чтобы занимали всю ширину и padding работал */
+}
+
+.about-me-nav .about-nav-link:hover {
+    background-color: rgba(var(--accent-warm-rgb), 0.15);
+    /* Легкий фон при наведении */
+    color: var(--accent-warm);
+}
+
+.about-me-nav .about-nav-link.active {
+    background-color: var(--accent-bright);
+    color: var(--bg-color);
+    /* Или var(--text-color) если контрастнее */
+    font-weight: 700;
+}
+
+/* Средняя колонка: Слайдер Фотографий */
+.about-me-photos {
+    position: relative;
+    /* Для абсолютного позиционирования изображений внутри */
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    /* Зададим пропорции для слайдера, например 4:3 или 16:9 */
+    aspect-ratio: 3 / 4;
+    /* Делаем более вертикальным, чтобы соответствовать левой колонке по высоте */
+    /* Или можно задать max-height, чтобы ограничить высоту */
+    /* max-height: 400px; /* Пример, подбери значение */
+    /* Можно изменить */
+    background-color: var(--border-color);
+    /* Фон, пока грузится первое фото */
+}
+
+
+.photo-slider-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.slider-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    border-radius: var(--border-radius);
+    /* Если нужно скругление и для картинок */
+}
+
+.slider-image.active {
+    opacity: 1;
+    z-index: 1;
+    /* Активное изображение поверх других */
+}
+
+/* Правая колонка: Динамический Текст */
+.about-me-content {
+    padding: calc(var(--index) * 0.5) calc(var(--index) * 1.5);
+    /* padding: 0; Убираем внутренние отступы, если контент будет плотнее */
+}
+
+.content-panel {
+    display: none;
+    /* Скрываем все панели по умолчанию */
+    opacity: 0;
+    transform: translateY(15px);
+    animation: fadeInContent 0.6s forwards ease-out;
+}
+
+.content-panel.active {
+    display: block;
+    /* Показываем активную панель */
+}
+
+.content-panel h4 {
+    font-family: var(--font-headings);
+    font-size: var(--fz-h3-sm);
+    color: var(--accent-bright);
+    margin-bottom: calc(var(--index) * 1);
+    /*margin-top: 0;  Убрать верхний отступ у заголовка, если он первый элемент */
+}
+
+.content-panel p {
+    font-family: var(--font-primary);
+    font-size: var(--fz-sm);
+    color: var(--text-text-block);
+    line-height: 1.8;
+    margin-bottom: calc(var(--index) * 1);
+}
+
+.content-panel p:last-child {
+    margin-bottom: 0;
+}
+
+@keyframes fadeInContent {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Адаптивность */
+@media (max-width: 1024px) {
+    .about-me-grid {
+        /* Для планшета можно сделать левую колонку уже, а правую и среднюю объединить */
+        grid-template-columns: 0.7fr 2.3fr;
+        /* Левая и правая/средняя объединены */
+        grid-template-areas:
+            "sidebar main"
+            "sidebar photos";
+        /* Если фото под текстом */
+        /* Или оставить 2 колонки и правая перенесется */
+        /* grid-template-columns: 1fr 1fr; */
+
+    }
+
+    .about-me-sidebar {
+        grid-area: sidebar;
+    }
+
+    .about-me-photos {
+        grid-area: photos;
+        /* Если фото под текстом на планшете */
+        /* Или оставить автоматическое размещение, если 2 колонки */
+        margin-top: calc(var(--index) * 1.5);
+        /* Отступ, если переносится */
+    }
+
+    .about-me-content {
+        grid-area: main;
+        /* Если фото под текстом на планшете */
+        /* grid-column: auto; */
+        /* Сброс, если было 1 / -1 */
+        margin-top: 0;
+    }
+}
+
+
+@media (max-width: 767px) {
+
+    /* Мобильные */
+    .about-me-grid {
+        grid-template-columns: 1fr;
+        /* Все в одну колонку */
+        grid-template-areas:
+            /* Сбрасываем grid-areas */
+            "sidebar"
+            "photos"
+            "main";
+    }
+
+    .about-me-sidebar {
+        border-right: none;
+        padding-bottom: calc(var(--index) * 1.5);
+        margin-bottom: calc(var(--index) * 1.5);
+        border-bottom: 1px solid var(--border-color);
+        /* Разделитель снизу */
+    }
+
+    .profile-photo-wrapper {
+        width: 120px;
+        height: 120px;
+    }
+
+    .about-me-photos {
+        margin-bottom: calc(var(--index) * 2);
+        aspect-ratio: 16 / 9;
+        /* Можно изменить пропорции для мобильных */
+    }
+
+    .about-me-content {
+        margin-top: 0;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- Portfolio Section --- */
+.portfolio-section {
+    padding: var(--section-padding);
+    position: relative;
+    z-index: 10;
+    background-color: var(--bg-color);
+
+}
+
+.portfolio-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: calc(var(--index) * 1.5);
+    padding: calc(var(--index) * 2) 0;
+    /* Spacing around the gallery */
+}
+
+.gallery-column {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--index) * 1.5);
+}
+
+.gallery-column--middle {
+    margin-top: calc(var(--index) * 2);
+    /* Creates the staggered effect */
+}
+
+.gallery-item {
+    width: 100%;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    background-color: var(--card-bg);
+    /* Or a slightly different shade like #202020 */
+    /* border: 1px solid var(--accent-bright); */
+    /* Subtle border */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-item--link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.gallery-item--link:hover {
+    transform: translateY(-5px) scale(1.02);
+    /* Slightly different hover */
+    box-shadow: 0 8px 25px rgba(var(--accent-bright-rgb), 0.15);
+    /* Shadow with accent color */
+}
+
+.gallery-item img {
+    display: block;
+    width: 100%;
+    height: auto;
+    /* Maintain aspect ratio */
+    object-fit: cover;
+    /* Ensure image covers the area if dimensions are fixed */
+}
+
+.text-block {
+    padding: calc(var(--index) * 1.2);
+    /* Increased padding */
+    color: var(--text-text-block);
+    /* Use the specific color for text blocks */
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    /* Allow text block to fill space in column if needed */
+}
+
+.text-block__h {
+    font-family: var(--font-headings);
+    font-size: var(--fz-h3-lg);
+    font-weight: 700;
+    color: var(--accent-bright);
+    text-transform: uppercase;
+    margin-bottom: calc(var(--index) * 0.7);
+    /* Increased margin */
+}
+
+.text-block__p {
+    font-size: var(--fz-sm);
+    line-height: 1.65;
+    /* Slightly more line height for readability */
+    opacity: 0.9;
+    /* Default for text-block */
+    flex-grow: 1;
+    /* Text fills available space */
+    margin-bottom: calc(var(--index) * 0.8);
+    /* Space before a potential button */
+}
+
+.text-block__p strong {
+    color: var(--text-color);
+    /* Brighter strong text */
+    font-weight: 600;
+}
+
+
+@media (max-width: 992px) {
+    .portfolio-gallery {
+        grid-template-columns: repeat(2, 1fr);
+        gap: calc(var(--index) * 1.8);
+    }
+
+    .gallery-column--middle {
+        margin-top: 0;
+        /* Reset stagger for 2-column layout */
+    }
+
+    /* Optional: make the third column (if it becomes alone) span full width or center */
+    .gallery-column:last-child:nth-child(odd) {
+        /* If 3 columns and last one is alone */
+        /* grid-column: span 2; */
+        /* Example: make it span full width */
+    }
+}
+
+@media (max-width: 600px) {
+    .portfolio-gallery {
+        grid-template-columns: 1fr;
+        /* Single column */
+        gap: calc(var(--index) * 2);
+    }
+
+    .gallery-column {
+        /* Reset individual column gaps if any specific were set */
+        gap: calc(var(--index) * 1.5);
+    }
+}
+
+
+/* --- Divider Section --- */
+.divider-section {
+    padding: calc(var(--index) * 4) 0;
+    position: relative;
+    z-index: 10;
+    background-color: var(--intro-section);
+    /* Same as intro for consistency */
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.divider-section h2 {
+    font-family: var(--font-headings);
+    font-size: var(--fz-h2-sm);
+    font-weight: 700;
+    margin-bottom: calc(var(--index) * 1);
+    color: var(--accent-bright);
+}
+
+.divider-section p {
+    font-size: var(--fz-base);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+    opacity: 0.8;
+}
+
+
+
+
+
+
+
+
+
+
+/* --- Automations Section --- */
+.automations-section {
+    padding: var(--section-padding);
+    position: relative;
+    z-index: 10;
+}
+
+.automations-section .automations-grid {
+    display: grid;
+    /* Desktop: Строго 3 колонки */
+    grid-template-columns: repeat(3, 1fr);
+    gap: calc(var(--index) * 2);
+    /* Используем существующий gap */
+}
+
+.automations-section .automation-card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(var(--accent-bright-rgb), 0.05);
+    transition: box-shadow 0.4s ease, transform 0.3s ease;
+}
+
+.automations-section .automation-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(var(--accent-bright-rgb), 0.15);
+}
+
+.automations-section .automation-card__image-wrapper {
+    width: 100%;
+    height: 180px;
+    /* Сохраняем высоту для десктопа */
+    overflow: hidden;
+}
+
+.automations-section .automation-card__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.automations-section .automation-card:hover .automation-card__image {
+    transform: scale(1.08);
+}
+
+.automations-section .automation-card__content {
+    padding: calc(var(--index) * 1.2) calc(var(--index) * 1.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.automations-section .automation-card__title {
+    font-family: var(--font-headings);
+    font-size: var(--fz-h3-md);
+    font-weight: 700;
+    margin-bottom: calc(var(--index) * 0.8);
+    color: var(--accent-bright);
+}
+
+.automations-section .automation-card__description {
+    font-size: var(--fz-sm);
+    color: var(--text-text-block);
+    opacity: 0.9;
+    margin-bottom: calc(var(--index) * 1.5);
+    flex-grow: 1;
+}
+
+.automations-section .automation-card .button {
+    margin-top: auto;
+    font-size: calc(var(--fz-sm) * 0.95);
+    padding: calc(var(--index) * 0.5) calc(var(--index) * 1.3);
+    min-width: 150px;
+}
+
+/* --- Адаптация для Automations Section --- */
+
+/* Планшеты (например, ширина до 991px) - 2 колонки */
+@media (max-width: 991px) {
+    .automations-section .automations-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: calc(var(--index) * 1.8);
+        /* Можно немного уменьшить отступ */
+    }
+
+    .automations-section .automation-card__image-wrapper {
+        height: 170px;
+        /* Можно скорректировать высоту изображения для планшетов */
+    }
+}
+
+/* Мобильные устройства (например, ширина до 767px) - 1 колонка */
+@media (max-width: 767px) {
+    .automations-section .automations-grid {
+        grid-template-columns: 1fr;
+        /* Одна колонка */
+        /* gap остается от предыдущего медиа-запроса или можно задать новый */
+    }
+
+    .automations-section .automation-card__image-wrapper {
+        height: 190px;
+        /* На мобильных можно сделать картинки чуть выше, если есть место */
+    }
+}
+
+
+@media (max-width: 480px) {
+    .automations-section .automation-card__image-wrapper {
+        height: 160px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- CTA Section --- */
+.cta-section {
+    padding: var(--section-padding);
+    position: relative;
+    z-index: 10;
+    background-color: var(--intro-section);
+    /* Consistent with intro/divider */
+    text-align: center;
+}
+
+.cta-section h2 {
+    font-family: var(--font-headings);
+    font-size: var(--fz-h2-md);
+    font-weight: 700;
+    margin-bottom: calc(var(--index) * 1);
+    color: var(--accent-bright);
+}
+
+.cta-section p {
+    font-size: var(--fz-base);
+    max-width: 700px;
+    margin: 0 auto calc(var(--index) * 1.5) auto;
+    line-height: 1.6;
+    opacity: 0.9;
+    color: var(--text-color);
+    /* Ensure contrast if bg is dark */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- Footer Section --- */
+.footer-section {
+    padding: calc(var(--index) * 3.5) 0 calc(var(--index) * 2.5) 0;
+    /* Adjusted padding */
+    font-size: var(--fz-sm);
+    color: var(--text-text-block);
+    /* Base color for footer text */
+    position: relative;
+    z-index: 10;
+    border-top: 1px solid var(--border-color);
+    background-color: var(--bg-color);
+    /* Ensuring footer has main bg */
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.8fr 1fr;
+    /* Current proportions */
+    gap: calc(var(--index) * 2.2);
+    /* Slightly adjusted gap */
+    align-items: start;
+    margin-bottom: calc(var(--index) * 3.5);
+    /* Increased margin */
+}
+
+.footer-column {
+    /* Base styles for all columns if any */
+}
+
+.footer-column--nav {
+    /* text-align: left; default */
+}
+
+.footer-heading {
+    font-family: var(--font-headings);
+    font-size: var(--fz-h4);
+    font-weight: 700;
+    color: var(--text-color);
+    /* Brighter headings */
+    margin-bottom: calc(var(--index) * 1.2);
+    /* Increased margin */
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.footer-column--nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-column--nav li {
+    margin-bottom: calc(var(--index) * 0.7);
+    /* Increased spacing */
+}
+
+.footer-column--nav a {
+    color: var(--text-text-block);
+    /* Consistent with footer base text */
+    text-decoration: none;
+    transition: color 0.3s ease, opacity 0.3s ease;
+}
+
+.footer-column--nav a:hover {
+    color: var(--accent-bright);
+    opacity: 1;
+    /* Ensure full opacity on hover */
+}
+
+.footer-column--connect.footer-card {
+    background-color: var(--card-bg);
+    /* Or slightly different like #222 */
+    border-radius: var(--border-radius);
+    padding: calc(var(--index) * 1.8);
+    /* Increased padding */
+    border: 1px solid var(--border-color);
+    box-shadow: 0 5px 20px rgba(var(--accent-bright-rgb), 0.08);
+    /* Subtle shadow */
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-column--connect .footer-heading {
+    text-align: center;
+    margin-bottom: calc(var(--index) * 1.5);
+    /* Increased margin */
+}
+
+.contact-form {
+    width: 100%;
+}
+
+.form-group {
+    margin-bottom: calc(var(--index) * 1);
+    /* Increased margin */
+    text-align: left;
+    /* Ensure labels are left-aligned */
+}
+
+.form-label {
+    display: block;
+    font-size: var(--fz-xs);
+    margin-bottom: calc(var(--index) * 0.3);
+    /* Increased margin */
+    opacity: 0.8;
+    color: var(--text-color);
+    /* Brighter labels */
+}
+
+.form-input,
+.form-textarea {
+    width: 100%;
+    padding: calc(var(--index) * 0.6);
+    /* Increased padding */
+    border: 1px solid var(--border-color);
+    border-radius: calc(var(--border-radius) * 0.75);
+    /* Slightly more rounded */
+    background-color: rgba(255, 255, 255, 0.03);
+    /* Darker input bg */
+    color: var(--text-color);
+    font-size: var(--fz-sm);
+    font-family: inherit;
+    transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    /* Added box-shadow */
+}
+
+.form-input:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: var(--accent-bright);
+    background-color: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 0 0 2px rgba(var(--accent-bright-rgb), 0.3);
+    /* Focus ring */
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 90px;
+    /* Increased min-height */
+}
+
+.form-button {
+    /* This targets the submit button in the form */
+    width: 100%;
+    margin-top: calc(var(--index) * 0.8);
+    /* Spacing above button */
+    /* Inherits .button and .button--main styles */
+}
+
+.error-message {
+    color: #ff6b6b;
+    /* Standard error color */
+    font-size: var(--fz-xs);
+    margin-top: calc(var(--index) * 0.25);
+    /* Adjusted margin */
+    min-height: 1.2em;
+    /* Ensure space for message */
+    display: block;
+    /* Ensure it takes up space */
+}
+
+.form-input.input-error,
+.form-textarea.input-error {
+    border-color: #ff6b6b;
+    background-color: rgba(255, 107, 107, 0.05);
+    /* Slight error background tint */
+}
+
+.footer-column--socials {
+    text-align: center;
+}
+
+.footer-column--socials .footer-heading--social {
+    margin-bottom: calc(var(--index) * 1.2);
+    /* Increased margin */
+}
+
+.footer-socials {
+    display: flex;
+    justify-content: center;
+    gap: calc(var(--index) * 1.5);
+    /* Increased gap */
+    align-items: center;
+}
+
+.footer-socials a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(var(--index) * 2.8);
+    /* Larger touch target */
+    height: calc(var(--index) * 2.8);
+    color: var(--text-text-block);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: var(--fz-base);
+    font-weight: 600;
+    /* Semi-bold for icons/text */
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+}
+
+.footer-socials a:hover {
+    background-color: var(--accent-bright);
+    color: var(--bg-color);
+    border-color: var(--accent-bright);
+    transform: scale(1.1) translateY(-2px);
+    /* Enhanced hover */
+}
+
+.footer-brand-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: calc(var(--index) * 3);
+    /* Increased margin */
+    padding-top: calc(var(--index) * 2);
+    /* Increased padding */
+    border-top: 1px solid var(--border-color);
+
+}
+
+.footer-brand-bottom .footer-logo-link {
+    display: none !important;
+    /* display: inline-block; */
+    /* margin-bottom: calc(var(--index) * 1.2); */
+    /* Increased margin */
+}
+
+.footer-brand-bottom .footer-logo {
+    height: calc(var(--index) * 4.8);
+    /* Slightly larger logo */
+    max-height: 85px;
+    width: auto;
+    opacity: 0.95;
+    /* Slightly more visible */
+}
+
+.footer-brand-bottom .footer-copyright {
+    font-size: var(--fz-xs);
+    line-height: 1.5;
+    opacity: 0.8;
+    /* Slightly more visible copyright */
+    color: var(--text-text-block);
+}
+
+/* Адаптация Футера */
+@media (max-width: 992px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: calc(var(--index) * 3);
+        /* Increased gap for single column */
+        margin-bottom: calc(var(--index) * 3.5);
+    }
+
+    .footer-column {
+        text-align: center;
+        /* margin-bottom is handled by grid gap */
+    }
+
+    .footer-column--nav {
+        order: 2;
+        /* Nav after socials */
+        margin-top: calc(var(--index) * 1.5);
+    }
+
+    .footer-column--nav ul {
+        display: inline-block;
+        /* For text-align: center to work on li */
+    }
+
+    .footer-column--connect.footer-card {
+        max-width: 550px;
+        /* Slightly wider form */
+        margin: 0 auto;
+        /* Center form */
+        order: 0;
+        /* Form first */
+    }
+
+    .footer-column--socials {
+        order: 1;
+        /* Socials after form */
+        margin-top: 0;
+        /* Reset margin as order changes */
+    }
+
+    .contact-form {
+        /* text-align: left; Already default for form-group */
+    }
+
+    .footer-brand-bottom {
+        margin-top: calc(var(--index) * 2.5);
+        padding-top: calc(var(--index) * 2.5);
+        order: 3;
+        /* Brand last */
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- Адаптация Заголовков и Текста (Общие правила) --- */
+@media (max-width: 767px) {
+    /* :root { --index: calc(1.2vw + 1.2vh); } /* Optional: slightly adjust --index for mobile */
+
+    .section-title,
+    .intro-section h2,
+    .cta-section h2 {
+        font-size: var(--fz-h2-xs);
+    }
+
+    .divider-section h2 {
+        font-size: clamp(1.4rem, calc(var(--index) * 1.45), 1.9rem);
+        /* Slightly adjusted */
+    }
+
+    .automations-section .automation-card__title,
+    .text-block__h {
+        font-size: var(--fz-h3-sm);
+    }
+
+    .footer-heading {
+        font-size: var(--fz-h4-sm);
+    }
+
+    .section-subtitle {
+        font-size: var(--fz-sm);
+        margin-bottom: calc(var(--index) * 2.2);
+        /* Adjusted */
+    }
+
+    .intro-section p,
+    .divider-section p,
+    .cta-section p,
+    .text-block__p {
+        font-size: var(--fz-sm);
+    }
+
+    .automations-section .automation-card__description {
+        font-size: var(--fz-xs);
+    }
+}
+
+
+.animated-section {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.2, 0.5, 0, 1),
+        transform 0.8s cubic-bezier(0.2, 0.5, 0, 1);
+    will-change: opacity, transform;
+}
+
+.animated-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+
+
+
+
+
+#interactiveNetworkCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+}
+
+
+
+.hero-content {
+    z-index: 4;
+    /* Должен быть выше canvas, если z-index canvas < 4 */
+    /* ... твои стили для позиционирования заголовка ... */
+    position: relative;
+    /* Добавь это к .hero-content, чтобы он точно создал свой контекст наложения */
+}

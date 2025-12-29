@@ -1,0 +1,247 @@
+/* css/blog.css */
+
+/* Если нужны переменные из main.css, убедитесь, что main.css загружается ПЕРЕД blog.css,
+   либо определите эти переменные здесь заново или импортируйте main.css в начало этого файла,
+   если ваш сборщик это поддерживает: @import url("main.css"); 
+   Однако, для простоты, лучше просто убедиться в правильном порядке подключения в HTML. */
+
+:root {
+    /* Можно переопределить или добавить переменные специфичные для блога, если нужно */
+    /* Например, если фон карточек блога должен отличаться */
+    /* --blog-card-bg: #333; */
+}
+
+/* --- Header для страницы блога (адаптировано из automations.css) --- */
+.blog-page-header {
+    background-color: var(--bg-color);
+    /* Предполагается, что var(--bg-color) из main.css доступна */
+    padding: 20px 0;
+    border-bottom: 1px solid var(--accent-bright);
+    /* Предполагается, что var(--accent-bright) из main.css доступна */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.blog-header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.blog-header-nav,
+.blog-header-placeholder {
+    flex: 1;
+}
+
+.blog-header-nav {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.blog-header-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 30px;
+}
+
+.blog-header-nav a {
+    text-decoration: none;
+    color: var(--text-color);
+    /* Предполагается, что var(--text-color) из main.css доступна */
+    font-weight: 600;
+    font-size: 1rem;
+    font-family: var(--font-primary);
+    /* Предполагается, что var(--font-primary) из main.css доступна */
+    transition: color 0.3s ease;
+    text-transform: uppercase;
+}
+
+.blog-header-nav a:hover {
+    color: var(--accent-bright);
+}
+
+.blog-header-title {
+    font-size: 2rem;
+    font-weight: 900;
+    font-family: var(--font-headings);
+    /* Предполагается, что var(--font-headings) из main.css доступна */
+    color: var(--text-color);
+    letter-spacing: -0.5px;
+    text-align: center;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.blog-header-placeholder {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* --- Секция постов блога --- */
+.blog-posts-section {
+    padding: calc(var(--index) * 3) 0 calc(var(--index) * 4) 0;
+    /* Предполагается, что var(--index) из main.css доступна */
+}
+
+.blog-posts-section .section-title {
+    /* Стили для .section-title и .section-subtitle можно взять из main.css, если они там общие */
+    text-align: center;
+    /* Если нужно выравнивание по центру для заголовков на странице блога */
+    margin-bottom: calc(var(--index) * 1);
+    /* Если стили уникальные, то задаем их здесь */
+    /* font-size: ...; color: ...; */
+}
+
+.blog-posts-section .section-subtitle {
+    text-align: center;
+    /* Если нужно выравнивание по центру для заголовков на странице блога */
+    margin-bottom: calc(var(--index) * 3.5);
+    /* Если стили уникальные, то задаем их здесь */
+    /* font-size: ...; color: ...; */
+}
+
+.blog-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* 4 карточки в ряд для десктопа */
+    gap: calc(var(--index) * 1.3);
+    /* Немного настроил gap */
+}
+
+/* Стили для карточки поста в блоге */
+.blog-post-card {
+    background-color: var(--automation-card-bg, #2a2a2a);
+    /* Используем переменную из automations.css или fallback */
+    border-radius: var(--border-radius, 8px);
+    /* Используем переменную из main.css или fallback */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: var(--text-color, #EAEAEA);
+    transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.blog-post-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 30px rgba(var(--accent-bright-rgb, 255, 127, 80), 0.25);
+    /* Используем переменную или fallback */
+}
+
+.blog-post-card__image-wrapper {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    /* Соотношение сторон для изображений в блоге, можно 16/10 */
+    overflow: hidden;
+    background-color: #222;
+    /* Фон-заполнитель для изображений */
+}
+
+.blog-post-card__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease-in-out;
+}
+
+.blog-post-card:hover .blog-post-card__image {
+    transform: scale(1.07);
+}
+
+.blog-post-card__title {
+    font-family: var(--font-headings, 'Poppins', sans-serif);
+    font-size: var(--fz-h5, 1.1rem);
+    /* Размер заголовка для карточки блога, подстройте */
+    color: var(--text-color, #EAEAEA);
+    font-weight: 700;
+    padding: calc(var(--index) * 0.9) calc(var(--index) * 1.1);
+    /* Паддинги для заголовка */
+    text-align: center;
+    line-height: 1.4;
+    flex-grow: 1;
+    /* Чтобы заголовок занимал доступное пространство и карточки были одной высоты */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 70px;
+    /* Минимальная высота блока с заголовком для выравнивания */
+}
+
+/* Адаптивность для сетки блога */
+@media (max-width: 1199px) {
+
+    /* Планшеты, альбомная ориентация и небольшие десктопы - 3 в ряд */
+    .blog-cards-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: calc(var(--index) * 1.2);
+    }
+
+    .blog-header-title {
+        font-size: 1.8rem;
+    }
+
+    .blog-header-nav a {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 767px) {
+
+    /* Планшеты, портретная ориентация - 2 в ряд */
+    .blog-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: calc(var(--index) * 1);
+    }
+
+    .blog-page-header {
+        padding: 15px 0;
+    }
+
+    .blog-header-container {
+        /* Можно оставить как есть или адаптировать как на automations.html, если нужно */
+        /* Например, если нужно складывать в столбец на мобильных: */
+        /* flex-direction: column; */
+        /* gap: 10px; */
+    }
+
+    .blog-header-title {
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 575px) {
+
+    /* Мобильные телефоны - 1 в ряд */
+    .blog-cards-grid {
+        grid-template-columns: 1fr;
+        gap: calc(var(--index) * 1.5);
+        /* Можно увеличить gap для одной колонки */
+    }
+
+    .blog-header-container {
+        /* Адаптация хедера для мобильных */
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .blog-header-nav,
+    .blog-header-placeholder {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .blog-header-title {
+        order: -1;
+        /* Заголовок будет первым элементом в flex-контейнере */
+    }
+
+    .blog-header-placeholder {
+        display: none;
+        /* Скрыть пустой плейсхолдер, если не нужен */
+    }
+}

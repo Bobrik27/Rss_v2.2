@@ -1,0 +1,364 @@
+/* css/automations.css */
+
+:root {
+    --automation-card-bg: #2a2a2a;
+    --popup-overlay-bg: rgba(0, 0, 0, 0.85);
+    /* Сделал чуть плотнее */
+    --popup-content-bg: #1f1f1f;
+    /* Чуть светлее основного фона сайта для контраста */
+    --popup-text-main: var(--text-color);
+    /* #EAEAEA */
+    --popup-text-secondary: var(--text-text-block);
+    /* #858d94 */
+    --popup-title-highlight: var(--accent-bright);
+    /* #FF7F50 */
+}
+
+/* --- Header (стили как у portfolio-page-header, адаптированные) --- */
+.automation-page-header {
+    background-color: var(--bg-color);
+    padding: 20px 0;
+    border-bottom: 1px solid var(--accent-bright);
+    position: sticky;
+    /* Делаем шапку липкой */
+    top: 0;
+    z-index: 1000;
+    /* Выше другого контента, но ниже popup */
+    /* Для эффекта размытия под шапкой при скролле (если ScrollSmoother активен) */
+    /* background-color: rgba(25, 25, 25, 0.85); */
+    /* backdrop-filter: blur(8px); */
+    /* -webkit-backdrop-filter: blur(8px); */
+}
+
+.automation-header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.automation-header-nav,
+.automation-header-placeholder {
+    flex: 1;
+}
+
+.automation-header-nav {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.automation-header-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 30px;
+}
+
+.automation-header-nav a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 600;
+    font-size: 1rem;
+    font-family: var(--font-primary);
+    transition: color 0.3s ease;
+    text-transform: uppercase;
+}
+
+.automation-header-nav a:hover {
+    color: var(--accent-bright);
+}
+
+.automation-header-title {
+    font-size: 2rem;
+    font-weight: 900;
+    font-family: var(--font-headings);
+    color: var(--text-color);
+    letter-spacing: -0.5px;
+    text-align: center;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.automation-header-placeholder {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* --- Секция списка автоматизаций --- */
+.automation-list-section {
+    padding: calc(var(--index) * 3) 0 calc(var(--index) * 4) 0;
+}
+
+.automation-list-section .section-title {
+    margin-bottom: calc(var(--index) * 1);
+}
+
+.automation-list-section .section-subtitle {
+    margin-bottom: calc(var(--index) * 3.5);
+}
+
+.automation-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: calc(var(--index) * 1.5);
+    /* Немного увеличил gap для читаемости */
+}
+
+.automation-preview-card {
+    background-color: var(--automation-card-bg);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.automation-preview-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 30px rgba(var(--accent-bright-rgb), 0.25);
+}
+
+.automation-preview-card__image-wrapper {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    /* Более прямоугольные, можно 4/3 или 1/1 для квадрата */
+    overflow: hidden;
+    background-color: #222;
+    /* Темный фон для фото */
+}
+
+.automation-preview-card__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease-in-out;
+}
+
+.automation-preview-card:hover .automation-preview-card__image {
+    transform: scale(1.07);
+}
+
+.automation-preview-card__title {
+    font-family: var(--font-headings);
+    /* Используем Poppins или Montserrat */
+    font-size: var(--fz-h4);
+    /* Адаптируем под размер карточки */
+    color: var(--text-color);
+    font-weight: 700;
+    padding: calc(var(--index) * 1) calc(var(--index) * 1.2);
+    text-align: center;
+    line-height: 1.45;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 70px;
+    /* Минимальная высота для заголовка, чтобы выровнять карточки */
+}
+
+/* --- Стили для Popup Модального окна --- */
+.automation-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--popup-overlay-bg);
+    display: flex;
+    /* Изначально none, меняется JS */
+    align-items: center;
+    justify-content: center;
+    z-index: 20000;
+    /* Очень высокий z-index */
+    opacity: 0;
+    visibility: hidden;
+    padding: 20px;
+    /* Отступы от краев экрана */
+    box-sizing: border-box;
+    /* Плавность для появления/исчезновения самого оверлея */
+    transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0.35s;
+}
+
+.automation-popup-overlay.visible {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
+}
+
+.automation-popup-content {
+    background-color: var(--popup-content-bg);
+    padding: calc(var(--index) * 2) calc(var(--index) * 2.5);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    width: 100%;
+    max-width: 2100px;
+    /* Ширина, как ты просил, можно подстроить */
+    height: auto;
+    max-height: calc(100vh - 80px);
+    /* 90vh, но с учетом padding оверлея, чтобы точно влез */
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    transform: translateY(20px) scale(0.98);
+    /* Начальное состояние для анимации */
+    opacity: 0;
+    /* Начальное состояние для анимации */
+    /* Плавность для появления/исчезновения контентного блока */
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.automation-popup-overlay.visible .automation-popup-content {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+}
+
+.automation-popup-close {
+    position: absolute;
+    top: 10px;
+    /* Ближе к краю */
+    right: 15px;
+    /* Ближе к краю */
+    background: transparent;
+    border: none;
+    font-size: 2.8rem;
+    /* Крупнее */
+    font-weight: 300;
+    color: var(--popup-text-secondary);
+    cursor: pointer;
+    line-height: 1;
+    padding: 5px 10px;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.automation-popup-close:hover {
+    color: var(--popup-title-highlight);
+    transform: rotate(90deg);
+}
+
+.popup-service-details-container {
+    /* Контейнер для контента ВНУТРИ popup */
+    /* Пусто, если не нужны доп. стили */
+}
+
+.popup-service-details-container img.popup-service-image {
+    width: 100%;
+    max-width: 550px;
+    /* Макс. ширина фото */
+    height: auto;
+    border-radius: calc(var(--border-radius) * 0.75);
+    margin: 0 auto calc(var(--index) * 1.8) auto;
+    display: block;
+    border: 1px solid var(--border-color);
+    /* Легкая рамка фото */
+}
+
+.popup-service-details-container .popup-text-content {
+    max-width: 1880px;
+    /* Ограничение ширины текста для читаемости */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.popup-service-details-container .popup-text-content h3 {
+    font-family: var(--font-headings);
+    font-size: calc(var(--fz-h2-xs) * 1.1);
+    /* Чуть крупнее */
+    color: var(--popup-title-highlight);
+    margin-bottom: calc(var(--index) * 1.8);
+    text-align: center;
+    line-height: 1.3;
+}
+
+.popup-service-details-container .how-it-works-title,
+.popup-service-details-container .benefit-title {
+    font-family: var(--font-headings);
+    font-size: calc(var(--fz-h4) * 1.1);
+    /* Чуть крупнее */
+    color: var(--popup-text-main);
+    font-weight: 700;
+    margin-top: calc(var(--index) * 1.8);
+    margin-bottom: calc(var(--index) * 0.6);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: calc(var(--index) * 0.3);
+}
+
+.popup-service-details-container p {
+    font-family: var(--font-primary);
+    font-size: var(--fz-base);
+    /* Сделал текст в popup чуть крупнее для читаемости */
+    color: var(--popup-text-secondary);
+    line-height: 1.75;
+    margin-bottom: calc(var(--index) * 1);
+}
+
+/* Адаптивность */
+@media (max-width: 991px) {
+    .automation-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: calc(var(--index) * 1.2);
+    }
+
+    .automation-header-title {
+        font-size: 1.8rem;
+    }
+
+    .automation-header-nav a {
+        font-size: 0.9rem;
+    }
+
+    .automation-popup-content {
+        max-width: 90%;
+        padding: calc(var(--index) * 1.5);
+    }
+}
+
+@media (max-width: 767px) {
+    .automation-cards-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .automation-page-header {
+        padding: 15px 0;
+    }
+
+    .automation-header-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .automation-header-nav,
+    .automation-header-placeholder {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .automation-header-title {
+        font-size: 1.6rem;
+        order: -1;
+    }
+
+    .automation-header-placeholder {
+        display: none;
+    }
+
+    .automation-popup-content {
+        width: calc(100% - 30px);
+        /* Почти на всю ширину с небольшими отступами */
+        max-width: none;
+        margin: 15px;
+        /* Отступы от краев экрана */
+        padding: calc(var(--index) * 1.2);
+        max-height: calc(100vh - 30px);
+    }
+
+    .popup-service-details-container .popup-text-content h3 {
+        font-size: var(--fz-h2-sm);
+    }
+
+    .popup-service-details-container img.popup-service-image {
+        max-width: 90%;
+    }
+}

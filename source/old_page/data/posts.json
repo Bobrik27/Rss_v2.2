@@ -1,0 +1,42 @@
+[
+    {
+        "id": "super-ai-automation-trends-2024",
+        "title": "Топ-5 трендов в AI автоматизации на 2024 год",
+        "imageUrl": "img/blog/img-1.jpg",
+        "articleUrl": "blog/articles/super-ai-automation-trends-2024.html",
+        "date": "2023-11-15T10:00:00Z",
+        "shortDescription": "Узнайте, какие направления в автоматизации с использованием ИИ будут доминировать в следующем году."
+    },
+    {
+        "id": "how-to-choose-n8n-vs-zapier",
+        "title": "N8N против Zapier: Что выбрать для ваших задач?",
+        "imageUrl": "img/blog/img-2.jpg",
+        "articleUrl": "blog/articles/how-to-choose-n8n-vs-zapier.html",
+        "date": "2023-11-10T14:30:00Z",
+        "shortDescription": "Сравнительный анализ двух популярных инструментов для автоматизации рабочих процессов."
+    },
+    {
+        "id": "automate-social-media-posting",
+        "title": "Автоматизация постинга в соцсети: Полное руководство",
+        "imageUrl": "img/blog/img-3.jpg",
+        "articleUrl": "blog/articles/automate-social-media-posting.html",
+        "date": "2023-11-05T09:15:00Z",
+        "shortDescription": "Как настроить автопостинг и сэкономить часы рабочего времени."
+    },
+    {
+        "id": "telegram-bot-for-business",
+        "title": "Создаем Telegram-бота для бизнеса без кода",
+        "imageUrl": "img/blog/img-4.jpg",
+        "articleUrl": "blog/articles/telegram-bot-for-business.html",
+        "date": "2023-11-01T12:00:00Z",
+        "shortDescription": "Пошаговая инструкция по созданию полезного бота для вашего дела."
+    },
+    {
+        "id": "future-of-work-automation",
+        "title": "Будущее работы: Как автоматизация меняет профессии",
+        "imageUrl": "img/blog/img-5.jpg",
+        "articleUrl": "blog/articles/future-of-work-automation.html",
+        "date": "2023-10-28T16:45:00Z",
+        "shortDescription": "Размышления о том, какие навыки будут востребованы в эпоху тотальной автоматизации."
+    }
+]

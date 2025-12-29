@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Блог - RunSwift Studio</title> <!-- Новый Title -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;900&family=Inter:wght@400;600&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/main.css"> <!-- Общие стили -->
+    <link rel="stylesheet" href="css/blog.css"> <!-- Специальные стили для блога -->
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="content">
+
+            <header class="blog-page-header"> <!-- Используем новый класс для возможной кастомизации хедера блога -->
+                <div class="container blog-header-container">
+                    <nav class="blog-header-nav">
+                        <ul>
+                            <li><a href="index.html">На главную</a></li>
+                            <!-- <li><a href="automations.html">Автоматизации</a></li> -->
+                            <!-- Ссылка на страницу автоматизаций -->
+                        </ul>
+                    </nav>
+                    <h1 class="blog-header-title">НАШ БЛОГ</h1>
+                    <div class="blog-header-placeholder"></div> <!-- Пустой для выравнивания -->
+                </div>
+            </header>
+
+            <main class="blog-page-content">
+                <section class="blog-posts-section">
+                    <div class="container">
+                        <h2 class="section-title">Статьи, кейсы и новости</h2>
+                        <p class="section-subtitle">Узнайте больше о возможностях автоматизации и современных
+                            технологиях.</p>
+
+                        <div class="blog-cards-grid">
+                            <!-- Сюда JavaScript будет добавлять карточки блога -->
+                            <!-- Пример одной карточки (для понимания структуры, будет генерироваться JS):
+                            <a href="/blog/articles/my-first-post.html" class="blog-post-card">
+                                <div class="blog-post-card__image-wrapper">
+                                    <img src="/img/blog/placeholder.jpg" alt="Заголовок статьи" class="blog-post-card__image" loading="lazy">
+                                </div>
+                                <h3 class="blog-post-card__title">Очень интересная статья номер один</h3>
+                            </a>
+                            -->
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+        </div> <!-- .content -->
+
+        <!-- Сюда можно добавить ваш футер, если он общий для всех страниц -->
+        <!-- <footer class="footer"> ... </footer> -->
+
+    </div> <!-- .wrapper -->
+
+    <!-- Подключаем JavaScript для загрузки постов в конце body для лучшей производительности -->
+    <script src="js/load-blog-posts.js" defer></script>
+</body>
+
+</html>

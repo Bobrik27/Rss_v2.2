@@ -1,46 +1,23 @@
 ---
+import Layout from '../../layouts/Layout.astro';
+
 export function getStaticPaths() {
   return [
-    { params: { lang: 'ru' } },
-    { params: { lang: 'en' } },
-    { params: { lang: 'de' } }
+    {params: {lang: 'ru'}},
+    {params: {lang: 'en'}},
+    {params: {lang: 'de'}},
   ];
 }
 
 const { lang } = Astro.params;
-import ThemeToggle from '../../components/ThemeToggle';
 ---
 
-<html lang={lang}>
- <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Hello World</title>
- </head>
-  <body class="bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] min-h-screen transition-colors duration-300">
-    <main class="container mx-auto px-4 py-8">
-      <header class="flex justify-between items-center mb-12">
-        <h1 class="text-3xl font-bold">Run Swift Studio v3</h1>
-        <div class="flex items-center space-x-4">
-          <div>
-            <a href="/ru" class={`px-3 py-1 rounded ${lang === 'ru' ? 'bg-gray-200 dark:bg-gray-700 font-bold' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600'}`}>Русский</a>
-            <a href="/en" class={`px-3 py-1 rounded ${lang === 'en' ? 'bg-gray-200 dark:bg-gray-700 font-bold' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600'}`}>English</a>
-            <a href="/de" class={`px-3 py-1 rounded ${lang === 'de' ? 'bg-gray-200 dark:bg-gray-700 font-bold' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600'}`}>Deutsch</a>
-          </div>
-          <ThemeToggle client:only="react" />
+<Layout title="Run Swift Studio" lang={lang}>
+    <main class="pt-20">
+        <!-- Placeholder for Hero, will be replaced later -->
+        <div class="container mx-auto px-4 py-20 text-center">
+            <h1 class="text-4xl font-bold mb-4">Hello World in {lang}</h1>
+            <p class="text-[var(--color-text-secondary)]">Styles are now working.</p>
         </div>
-      </header>
-      
-      <section class="text-center py-20">
-        <h2 class="text-5xl font-bold mb-6">Hello World in {lang}</h2>
-        <p class="text-xl text-[var(--color-text-secondary)] max-w-2xl mx-auto">
-          Welcome to Run Swift Studio v3, your new portfolio site with internationalization and dark/light theme support.
-        </p>
-      </section>
-      
-      <footer class="mt-20 pt-8 border-t border-[var(--color-border)] text-center text-[var(--color-text-secondary)]">
-        <p>© {new Date().getFullYear()} Run Swift Studio v3. All rights reserved.</p>
-      </footer>
     </main>
-  </body>
-</html>
+</Layout>

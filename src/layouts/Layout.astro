@@ -1,0 +1,48 @@
+---
+import '../styles/global.css'; // CRITICAL: Import Tailwind styles
+import ThemeToggle from '../components/ThemeToggle';
+import LanguagePicker from '../components/LanguagePicker.astro';
+
+interface Props {
+	title: string;
+    lang: string;
+}
+
+const { title, lang } = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang} data-theme="dark">
+	<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+        
+        <!-- Prevent Flash of Light Mode (Optional safety script) -->
+        <script is:inline>
+            const theme = localStorage.getItem('theme');
+            if (theme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        </script>
+	</head>
+	<body class="bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] font-sans antialiased min-h-screen selection:bg-[var(--color-accent-primary)] selection:text-[var(--color-text-primary)]">
+        
+        <!-- Header / Nav -->
+        <header class="fixed top-0 w-full z-50 flex items-center justify-between px-6 py-4 backdrop-blur-sm border-b border-[var(--color-border)]">
+            <div class="font-bold text-xl tracking-tight">
+                Run Swift <span class="text-[var(--color-accent-primary)]">Studio</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <LanguagePicker />
+                <ThemeToggle client:load />
+            </div>
+        </header>
+
+        <!-- Main Content Slot -->
+		<slot />
+        
+	</body>
+</html>

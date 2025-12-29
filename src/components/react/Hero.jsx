@@ -38,7 +38,11 @@ const Hero = () => {
   return (
     <section
       ref={containerRef}
-      className={`relative h-screen w-full flex flex-col items-center justify-center overflow-hidden transition-colors duration-500`}
+      className={`relative h-screen w-full flex flex-col items-center justify-center overflow-hidden transition-colors duration-500 ${
+        isDark
+          ? 'bg-gradient-to-b from-slate-900 to-slate-800 text-white'
+          : 'bg-white text-slate-900'
+      }`}
     >
       {/* Интерактивная сеть комет */}
       <InteractiveNetwork
@@ -62,32 +66,38 @@ const Hero = () => {
       />
 
       <div className="relative z-10 flex flex-col items-center justify-center">
-        <h1
-          ref={titleRef}
-          className="flex flex-wrap justify-center font-black leading-none select-none"
-        >
-          {/* RUNSWIFT (Connected) */}
-          {'RUNSWIFT'.split('').map((char, i) => (
-            <span
-              key={`r-${i}`}
-              className={`letter inline-block text-[10vw] md:text-[8rem] lg:text-[9rem] ${
-                isDark ? 'text-white' : 'text-slate-900'
-              }`}
-              style={{ textShadow: isDark ? '0 0 30px rgba(255,255,255,0.3)' : 'none' }}
-            >
+        <h1 ref={titleRef} className="flex flex-wrap justify-center font-black leading-none select-none">
+          {/* RUNSWIFT (Белый + Белая обводка + Белое свечение) */}
+          {"RUNSWIFT".split("").map((char, i) => (
+            <span key={`r-${i}`}
+              className={`letter inline-block text-[10vw] md:text-[8rem] lg:text-[9rem] ${isDark ? 'text-white' : 'text-slate-900'}`}
+              style={{
+                // Четкая обводка (разделяет буквы)
+                WebkitTextStroke: isDark ? '1px rgba(255, 255, 255, 0.5)' : '0px',
+                // Двойное свечение: яркий контур + мягкий свет
+                textShadow: isDark
+                  ? '0 0 10px rgba(255,255,255,0.8), 0 0 40px rgba(255,255,255,0.3)'
+                  : 'none'
+              }}>
               {char}
             </span>
           ))}
-
+          
+          {/* Пробел */}
           <span className="inline-block w-[2vw] md:w-[2rem]"></span>
 
-          {/* STUDIO (Orange) */}
-          {'STUDIO'.split('').map((char, i) => (
-            <span
-              key={`s-${i}`}
+          {/* STUDIO (Оранжевый + Белая обводка + Оранжевое свечение) */}
+          {"STUDIO".split("").map((char, i) => (
+            <span key={`s-${i}`}
               className="letter inline-block text-[10vw] md:text-[8rem] lg:text-[9rem] text-[#ff6d5a]"
-              style={{ textShadow: isDark ? '0 0 30px rgba(255, 109, 90, 0.4)' : 'none' }}
-            >
+              style={{
+                // Обводка сохраняет форму букв
+                WebkitTextStroke: isDark ? '1px rgba(255, 255, 255, 0.5)' : '0px',
+                // Оранжевое свечение
+                textShadow: isDark
+                  ? '0 0 10px rgba(255, 109, 90, 0.6), 0 0 40px rgba(255, 109, 90, 0.4)'
+                  : 'none'
+              }}>
               {char}
             </span>
           ))}

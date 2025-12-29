@@ -79,11 +79,12 @@ const useFallingLetters = (titleRef, containerRef, options = {}) => {
       scrollTriggerRef.current = ScrollTrigger.create({
         trigger: container,
         start: 'top top',
-        end: '+=100px',
+        end: '+=100px', // Как в оригинале: падение происходит за 100px скролла
         scrub,
         onUpdate: (self) => {
           lettersRef.current.forEach((letter, i) => {
             const params = letterParams[i];
+            // Оригинальная формула из old_page
             let letterFallProgress = Math.max(0, (self.progress - params.randomDelayFactor * 0.3) / 2.4);
             letterFallProgress = Math.min(1, letterFallProgress);
 

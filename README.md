@@ -1,43 +1,52 @@
-# Astro Starter Kit: Minimal
+# Run Swift Studio — переработка сайта v2.2
+
+> Промежуточная версия сайта студии: эксперименты с интерактивным первым экраном, анимациями, темами и языковыми маршрутами.
+
+## Зачем создавался проект
+
+Цель этой итерации — перенести и переработать визуальные решения прежнего сайта на Astro и React: кометы, интерактивную сеть, падающие буквы и анимации при прокрутке.
+
+Это прежде всего этап разработки интерфейса Run Swift Studio. **RSS — сокращение названия студии, а не RSS-агрегатор.**
+
+## Что есть в коде
+
+- Первый экран на React с анимациями **GSAP / ScrollTrigger**.
+- Интерактивная сеть на Canvas.
+- Хук анимации падающих букв.
+- Переключение светлой и тёмной темы.
+- Маршруты `ru`, `en`, `de` и выбор языка.
+- Дополнительная секция под первым экраном.
+- Старые варианты сайта и исходные материалы в `source/`.
+
+Наличие языковых маршрутов не означает полного перевода всех текстов: в компонентах остаётся жёстко заданный контент.
+
+## Где что искать
+
+| Путь | Содержимое |
+|---|---|
+| `src/pages/[lang]/index.astro` | Главная страница с языковым параметром. |
+| `src/components/react/Hero.jsx` | Первый экран. |
+| `src/components/react/InteractiveNetwork.jsx` | Интерактивная сеть и кометы. |
+| `src/hooks/useFallingLetters.js` | Анимация букв. |
+| `src/components/AdditionalSection.astro` | Дополнительный блок страницы. |
+| `source/` | Старые версии и материалы для переноса. |
+| `project_report.md` | Исторический отчёт о переработке. |
+
+## Стек и локальный запуск
+
+**Astro, React, TypeScript/JavaScript, Tailwind CSS, GSAP, Canvas.**
 
 ```sh
-npm create astro@latest -- --template minimal
+npm install
+npm run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+`npm run build` — сборка, `npm run preview` — просмотр сборки. Свежий запуск в рамках оформления README не выполнялся.
 
-## 🚀 Project Structure
+## Место среди версий
 
-Inside of your Astro project, you'll see the following folders and files:
+- [Rss_v2.0](https://github.com/Bobrik27/Rss_v2.0) — ранний сайт-портфолио с основными разделами.
+- **Этот репозиторий: v2.2** — промежуточная переработка визуальной части.
+- [Rss_v2.3](https://github.com/Bobrik27/Rss_v2.3) — более развитая витрина студии с WB Audit.
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Для знакомства с актуальнейшей из этих трёх версий сначала откройте v2.3; v2.2 полезна как история экспериментов с интерфейсом.
